@@ -4,7 +4,7 @@
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
     "start": "node ./server.js",
-    "dev": "parcel ./static/index.html",
+    "dev": "parcel ./src/pages/**/*.hbs --no-source-maps --no-cache",
     "build": "parcel build ./static/index.html"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/kokoccc/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "express": "^4.18.1",
     "parcel": "^2.6.2"
   }

@@ -1,0 +1,11 @@
+{{#extend 'layout'}}
+  {{#content 'body'}}
+    <ul>
+      {{#each pages}}
+      <li>
+        <a href="{{this}}">{{this}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  {{/content}}
+{{/extend}}
