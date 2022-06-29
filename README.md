@@ -26,6 +26,8 @@
 
 Для стилизации используется БЭМ и немного своих Utility-first хелперов.
 
+При Production-сборке неиспользуемые стили удаляются.
+
 
 ## Команды
 
@@ -33,7 +35,6 @@
 npm i # Установка зависимостей
 npm run dev # Локальная разработка
 npm run build # Production-сборка
-npm run start # Запуск Express-сервера
+npm run start # build и запуск Express-сервера
 npm run clean # Удаление dist и кэша
-npm run clean:cache # Удаление и кэша
 ```

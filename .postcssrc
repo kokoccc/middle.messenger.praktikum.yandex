@@ -4,6 +4,9 @@
     "postcss-calc": true,
     "postcss-advanced-variables": true,
     "postcss-nested": true,
-    "postcss-map-get": true
+    "postcss-map-get": true,
+    "@fullhuman/postcss-purgecss": {
+      "content": ["./src/**/*.hbs"]
+    }
   }
 }

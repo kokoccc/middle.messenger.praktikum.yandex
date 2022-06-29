@@ -1,30 +1,30 @@
 [
   {
-    "name": "404",
-    "path": "404.hbs"
-  },
-  {
-    "name": "500",
-    "path": "500.hbs"
-  },
-  {
-    "name": "login",
+    "name": "Вход",
     "path": "login.hbs"
   },
   {
-    "name": "registration",
+    "name": "Регистрация",
     "path": "registration.hbs"
   },
   {
-    "name": "profile",
+    "name": "Профиль",
     "path": "profile.hbs"
   },
   {
-    "name": "password",
+    "name": "Смена пароля",
     "path": "password.hbs"
   },
   {
-    "name": "chats",
+    "name": "Ошибка 404",
+    "path": "404.hbs"
+  },
+  {
+    "name": "Ошибка 500",
+    "path": "500.hbs"
+  },
+  {
+    "name": "Чаты",
     "path": "chats.hbs"
   }
 ]
