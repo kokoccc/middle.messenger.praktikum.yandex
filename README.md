@@ -27,12 +27,13 @@
 Для стилизации используется БЭМ и немного своих Utility-first хелперов.
 
 
-## Команды для запуска
+## Команды
 
 ```bash
 npm i # Установка зависимостей
 npm run dev # Локальная разработка
 npm run build # Production-сборка
 npm run start # Запуск Express-сервера
-npm run delete-cache # Удаление кэша
+npm run clean # Удаление dist и кэша
+npm run clean:cache # Удаление и кэша
 ```
