@@ -1,0 +1,21 @@
+---
+title: Авторизация
+---
+
+{{#extend 'sheet'}}
+  {{#content 'content'}}
+  <div class="login">
+    <header>
+      {{#embed 'tabs' class='mt-6 title-3-medium' active-tab='login'}}{{/embed}}
+    </header>
+
+    <form class="login__form mt-8">
+      {{#embed 'text-field' class='mx-auto' label='Логин' name='login' placeholder='vasyapupkin'}}{{/embed}}
+
+      {{#embed 'text-field' class='mx-auto mt-5' label='Пароль' name='password' type='password' placeholder='********'}}{{/embed}}
+
+      {{#embed 'button' class='login__button mt-6' text='Войти'}}{{/embed}}
+    </form>
+  </div>
+  {{/content}}
+{{/extend}}

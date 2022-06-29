@@ -4,8 +4,10 @@
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
     "start": "node ./server.js",
-    "dev": "parcel ./src/pages/**/*.hbs --no-source-maps --no-cache",
-    "build": "parcel build ./static/index.html"
+    "dev": "parcel ./src/pages/*.hbs --no-source-maps --no-cache",
+    "build": "npm run clean && parcel build ./src/pages/*.hbs --no-cache",
+    "clean": "rimraf dist && npm run delete-cache",
+    "delete-cache": "rimraf .parcel-cache && rimraf .cache"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,16 @@
   "homepage": "https://github.com/kokoccc/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "autoprefixer": "^10.4.7",
     "express": "^4.18.1",
-    "parcel": "^2.6.2"
+    "handlebars": "^4.7.7",
+    "parcel": "^2.6.2",
+    "parcel-reporter-static-files-copy": "^1.3.4",
+    "postcss": "^8.4.14",
+    "postcss-advanced-variables": "^3.0.1",
+    "postcss-import": "^14.1.0",
+    "postcss-map-get": "^0.3.0",
+    "postcss-nested": "^5.0.6",
+    "rimraf": "^3.0.2"
   }
 }

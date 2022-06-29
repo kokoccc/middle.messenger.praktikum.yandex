@@ -1,3 +1,30 @@
 [
-  "404"
+  {
+    "name": "404",
+    "path": "404.hbs"
+  },
+  {
+    "name": "500",
+    "path": "500.hbs"
+  },
+  {
+    "name": "login",
+    "path": "login.hbs"
+  },
+  {
+    "name": "registration",
+    "path": "registration.hbs"
+  },
+  {
+    "name": "profile",
+    "path": "profile.hbs"
+  },
+  {
+    "name": "password",
+    "path": "password.hbs"
+  },
+  {
+    "name": "chats",
+    "path": "chats.hbs"
+  }
 ]

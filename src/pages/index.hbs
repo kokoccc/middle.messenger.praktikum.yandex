@@ -1,11 +1,17 @@
-{{#extend 'layout'}}
-  {{#content 'body'}}
-    <ul>
-      {{#each pages}}
-      <li>
-        <a href="{{this}}">{{this}}</a>
-      </li>
-      {{/each}}
-    </ul>
+{{#extend 'sheet'}}
+  {{#content 'content'}}
+    {{#embed 'header' title='Yandex Chat'}}{{/embed}}
+
+    <nav>
+      <ul>
+        {{#each pages}}
+        <li>
+          <a class="body-medium blue-dark" href="{{./[path]}}"> {{./[name]}} </a>
+        </li>
+        {{/each}}
+      </ul>
+    </nav>
+
+    <a href="https://www.figma.com/file/bz3fUfefTOGr6PPyeUTwxR/YaChat?node-id=5%3A895" target="_blank">Макет в Figma</a>
   {{/content}}
 {{/extend}}

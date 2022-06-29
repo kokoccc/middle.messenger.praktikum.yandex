@@ -1,0 +1,12 @@
+<button
+  class="
+    ui-btn px-4 py-2 body-medium {{ class }}
+    {{#if block}}ui-btn_block{{/if}}
+    {{#if secondary}}ui-btn_secondary{{/if}}
+    {{#if outlined}}ui-btn_outlined{{/if}}
+    {{#if disabled}}ui-btn_disabled{{/if}}"
+  {{#if disabled}}disabled{{/if}}
+  type="button"
+>
+  {{ defaultValue text 'Button' }}
+</button>
