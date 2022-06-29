@@ -2,8 +2,7 @@
 
 ## О проекте
 
-Проект в рамках Яндекс Практикума. [Макет в Figma](https://www.figma.com/file/bz3fUfefTOGr6PPyeUTwxR/YaChat?node-id=5%3A895)
-
+Проект в рамках Яндекс Практикума. [Макет в Figma](https://www.figma.com/file/bz3fUfefTOGr6PPyeUTwxR/YaChat?node-id=5%3A895)  
 Пулреквесты: [#1](https://github.com/kokoccc/middle.messenger.praktikum.yandex/pull/1)
 
 
