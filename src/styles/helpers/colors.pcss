@@ -1,0 +1,78 @@
+$colors: (
+  black: #000000,
+  white: #FFFFFF,
+  overlay: rgba(0, 0, 0, 0.3),
+
+  gray-lightest: #F7F8FA,
+  gray-lighter: #EAEAEA,
+  gray-light: #CDCDCD,
+  gray: #999999,
+  gray-dark: #7A7A7A,
+  gray-darker: #5C5C5C,
+  gray-darkest: #333333,
+
+  red-lightest: #FBDBDD,
+  red-lighter: #F7ACB1,
+  red-light: #F37E85,
+  red: #EE4F5A,
+  red-dark: #EA212E,
+  red-darker: #C4131F,
+  red-darkest: #960E17,
+
+  orange-lightest: #FEE5D8,
+  orange-lighter: #FCC4A7,
+  orange-light: #FAA475,
+  orange: #F88344,
+  orange-dark: #F66313,
+  orange-darker: #CE4D08,
+  orange-darkest: #9D3B06,
+
+  yellow-lightest: #FDF5D8,
+  yellow-lighter: #FBE8A7,
+  yellow-light: #F9DB76,
+  yellow: #F7CE45,
+  yellow-dark: #F5C114,
+  yellow-darker: #CDA009,
+  yellow-darkest: #9D7A07,
+
+  green-lightest: #A1EFBD,
+  green-lighter: #71E69C,
+  green-light: #41DE7B,
+  green: #22C55E,
+  green-dark: #1A9547,
+  green-darker: #116530,
+  green-darkest: #093619,
+
+  blue-lightest: #DFEBFB,
+  blue-lighter: #ADCBF5,
+  blue-light: #7BABEF,
+  blue: #498CE9,
+  blue-dark: #1B6DDF,
+  blue-darker: #1554AD,
+  blue-darkest: #0F3C7B,
+
+  purple-lightest: #EDDEF7,
+  purple-lighter: #D5B1EC,
+  purple-light: #BC83E2,
+  purple: #A356D7,
+  purple-dark: #8A2FC6,
+  purple-darker: #6A2499,
+  purple-darkest: #4A196B,
+
+  deep-purple-lightest: #D9D8F4,
+  deep-purple-lighter: #AEACE7,
+  deep-purple-light: #8481DB,
+  deep-purple: #5955CE,
+  deep-purple-dark: #3935B7,
+  deep-purple-darker: #2B288B,
+  deep-purple-darkest: #1E1B5F
+);
+
+@each $color $key in $colors {
+  .$key {
+    color: $color;
+  }
+  .bg-$key {
+    background-color: $color;
+  }
+}

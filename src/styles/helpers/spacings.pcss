@@ -1,0 +1,26 @@
+$step: 4px;
+$steps-count: 20;
+
+@for $i from 0 to $steps-count { .m-$i { margin: calc($i*$step) }}
+@for $i from 0 to $steps-count { .mt-$i { margin-top: calc($i*$step) }}
+@for $i from 0 to $steps-count { .mr-$i { margin-right: calc($i*$step) }}
+@for $i from 0 to $steps-count { .mb-$i { margin-bottom: calc($i*$step) }}
+@for $i from 0 to $steps-count { .ml-$i { margin-left: calc($i*$step) }}
+@for $i from 0 to $steps-count { .mx-$i { margin-left: calc($i*$step); margin-right: calc($i*$step) }}
+@for $i from 0 to $steps-count { .my-$i { margin-top: calc($i*$step); margin-bottom: calc($i*$step) }}
+
+@for $i from 0 to $steps-count { .p-$i { padding: calc($i*$step) }}
+@for $i from 0 to $steps-count { .pt-$i { padding-top: calc($i*$step) }}
+@for $i from 0 to $steps-count { .pr-$i { padding-right: calc($i*$step) }}
+@for $i from 0 to $steps-count { .pb-$i { padding-bottom: calc($i*$step) }}
+@for $i from 0 to $steps-count { .pl-$i { padding-left: calc($i*$step) }}
+@for $i from 0 to $steps-count { .px-$i { padding-left: calc($i*$step); padding-right: calc($i*$step) }}
+@for $i from 0 to $steps-count { .py-$i { padding-top: calc($i*$step); padding-bottom: calc($i*$step) }}
+
+.m-auto { margin: auto; }
+.mt-auto { margin-top: auto; }
+.mr-auto { margin-right: auto; }
+.mb-auto { margin-bottom: auto; }
+.ml-auto { margin-left: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }

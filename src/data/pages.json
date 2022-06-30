@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Вход",
+    "path": "login.hbs"
+  },
+  {
+    "name": "Регистрация",
+    "path": "registration.hbs"
+  },
+  {
+    "name": "Профиль",
+    "path": "profile.hbs"
+  },
+  {
+    "name": "Смена пароля",
+    "path": "password.hbs"
+  },
+  {
+    "name": "Ошибка 404",
+    "path": "404.hbs"
+  },
+  {
+    "name": "Ошибка 500",
+    "path": "500.hbs"
+  },
+  {
+    "name": "Чаты",
+    "path": "chats.hbs"
+  }
+]
