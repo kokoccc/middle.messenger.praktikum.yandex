@@ -1,5 +1,5 @@
-const defaultValue = (value, defaultValue) => value || defaultValue;
+const defaultValue = (value, defaultVal) => value || defaultVal;
 
 module.exports = {
   defaultValue,
-}
+};

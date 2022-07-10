@@ -1,0 +1,9 @@
+{
+  "extends": "airbnb",
+  "rules": {},
+  "settings": {
+    "react": {
+      "version": "999.999.999" // Fix ESLint React warning
+    }
+  }
+}
