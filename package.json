@@ -10,7 +10,8 @@
     "start": "run-s build server",
     "clean": "run-p clean:*",
     "clean:dist": "rimraf dist",
-    "clean:cache": "rimraf .parcel-cache && rimraf .cache"
+    "clean:cache": "rimraf .parcel-cache && rimraf .cache",
+    "stylelint": "stylelint './src/**/*.pcss'"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,8 @@
     "postcss-import": "^14.1.0",
     "postcss-map-get": "^0.3.0",
     "postcss-nested": "^5.0.6",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard-scss": "^4.0.0"
   }
 }
