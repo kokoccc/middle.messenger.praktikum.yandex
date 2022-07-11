@@ -1,9 +1,11 @@
 <{{ defaultValue tag 'nav' }} class="tabs {{ class }}">
   {{#each tabs}}
-    {{#if (eq ../active-tab ./[handle])}}
-    <span class="tab tab_current">{{./[name]}}</span>
+    {{#if (eq ../active-tab this)}}
+    <span class="tab tab_current">{{ pageData ../pages this 'name' }}</span>
     {{else}}
-    <a class="tab tab_link blue-dark" href="{{./[path]}}">{{./[name]}}</a>
+    <a class="tab tab_link blue-dark" href="{{ pageData ../pages this 'path' }}">
+      {{ pageData ../pages this 'name' }}
+    </a>
     {{/if}}
   {{/each}}
 </{{ defaultValue tag 'nav' }}>

@@ -1,12 +1,1 @@
-[
-  {
-    "handle": "login",
-    "name": "Вход",
-    "path": "login.hbs"
-  },
-  {
-    "handle": "registration",
-    "name": "Регистрация",
-    "path": "registration.hbs"
-  }
-]
+["login", "registration"]
