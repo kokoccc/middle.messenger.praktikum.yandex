@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
-    "dev": "parcel ./src/pages/*.hbs --no-source-maps --no-cache",
+    "dev": "parcel ./src/index.html --no-source-maps --no-cache",
     "build": "run-s clean build:*",
     "build:parcel": "parcel build ./src/pages/*.hbs --no-cache",
     "server": "node ./server.js",
@@ -11,9 +11,12 @@
     "clean": "run-p clean:*",
     "clean:dist": "rimraf dist",
     "clean:cache": "rimraf .parcel-cache && rimraf .cache",
-    "lint": "node_modules/.bin/eslint .",
-    "lint:fix": "node_modules/.bin/eslint . --fix",
-    "stylelint": "stylelint './src/**/*.pcss'"
+    "eslint": "node_modules/.bin/eslint ./src/**/*.{js,ts}",
+    "eslint:fix": "node_modules/.bin/eslint ./src/**/*.{js,ts} --fix",
+    "stylelint": "stylelint './src/**/*.pcss'",
+    "stylelint:fix": "stylelint './src/**/*.pcss' --fix",
+    "lint": "run-p eslint stylelint",
+    "lint:fix": "run-p eslint:fix stylelint:fix"
   },
   "repository": {
     "type": "git",
@@ -27,15 +30,17 @@
   },
   "homepage": "https://github.com/kokoccc/middle.messenger.praktikum.yandex#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "handlebars": "^4.7.7"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "@fullhuman/postcss-purgecss": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
-    "handlebars": "^4.7.7",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.6.2",
     "parcel-reporter-static-files-copy": "^1.3.4",

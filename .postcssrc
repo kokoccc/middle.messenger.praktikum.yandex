@@ -6,7 +6,7 @@
     "postcss-nested": true,
     "postcss-map-get": true,
     "@fullhuman/postcss-purgecss": {
-      "content": ["./src/**/*.hbs"]
+      "content": ["./src/**/*.html"]
     }
   }
 }

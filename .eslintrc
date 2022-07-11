@@ -1,6 +1,17 @@
 {
-  "extends": "airbnb",
-  "rules": {},
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-restricted-exports": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off"
+  },
   "settings": {
     "react": {
       "version": "999.999.999" // Fix ESLint React warning
