@@ -7,7 +7,12 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/no-empty-function": "off",
+    "class-methods-use-this": "off",
     "no-restricted-exports": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off"

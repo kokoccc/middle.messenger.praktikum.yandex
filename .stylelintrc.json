@@ -9,7 +9,6 @@
   },
   "ignoreFiles": [
     ".cache/*",
-    ".parcel-cache/*",
     "dist/*",
     "src/**/normalize.pcss"
   ]

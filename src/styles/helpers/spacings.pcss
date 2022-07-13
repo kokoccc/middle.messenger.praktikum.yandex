@@ -87,3 +87,92 @@ $steps-count: 20;
   margin-top: auto;
   margin-bottom: auto;
 }
+
+@include desktop {
+  @for $i from 0 to $steps-count {
+    .m-md-$i {
+      margin: calc($i * $step);
+    }
+
+    .mt-md-$i {
+      margin-top: calc($i * $step);
+    }
+
+    .mr-md-$i {
+      margin-right: calc($i * $step);
+    }
+
+    .mb-md-$i {
+      margin-bottom: calc($i * $step);
+    }
+
+    .ml-md-$i {
+      margin-left: calc($i * $step);
+    }
+
+    .mx-md-$i {
+      margin-left: calc($i * $step);
+      margin-right: calc($i * $step);
+    }
+
+    .p-md-$i {
+      padding: calc($i * $step);
+    }
+
+    .pt-md-$i {
+      padding-top: calc($i * $step);
+    }
+
+    .pr-md-$i {
+      padding-right: calc($i * $step);
+    }
+
+    .pb-md-$i {
+      padding-bottom: calc($i * $step);
+    }
+
+    .pl-md-$i {
+      padding-left: calc($i * $step);
+    }
+
+    .px-md-$i {
+      padding-left: calc($i * $step);
+      padding-right: calc($i * $step);
+    }
+
+    .py-md-$i {
+      padding-top: calc($i * $step);
+      padding-bottom: calc($i * $step);
+    }
+  }
+
+  .m-md-auto {
+    margin: auto;
+  }
+
+  .mt-md-auto {
+    margin-top: auto;
+  }
+
+  .mr-md-auto {
+    margin-right: auto;
+  }
+
+  .mb-md-auto {
+    margin-bottom: auto;
+  }
+
+  .ml-md-auto {
+    margin-left: auto;
+  }
+
+  .mx-md-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .my-md-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
