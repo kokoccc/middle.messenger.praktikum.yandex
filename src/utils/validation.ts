@@ -71,8 +71,12 @@ export const onSubmit = (event: Event) => {
   event.preventDefault();
 
   const formEl = event.target as HTMLFormElement;
-  const inputs = formEl.querySelectorAll('input');
+  const formData = Object.fromEntries(new FormData(formEl));
 
+  // eslint-disable-next-line no-console
+  console.log(formData);
+
+  const inputs = formEl.querySelectorAll('input');
   inputs.forEach(validate);
 };
 
