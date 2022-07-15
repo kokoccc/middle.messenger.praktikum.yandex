@@ -150,29 +150,9 @@ export class Block {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = template(propsAndStubs) as string;
 
-    // const compiledBlock = Handlebars.compile(template);
-    // templateElement.innerHTML = compiledBlock(propsAndStubs);
-
-    console.warn(this.constructor.name);
-
     Object.values(this.children).forEach((child) => {
       const stub = templateElement.content.querySelector(`[data-id="${child.id}"]`) as HTMLElement;
-
-      // @TODO: Разобраться со стабами
-
-      console.log(`----- stub ${this.constructor.name} -----\n\n`, stub, '\n\n', stub.outerHTML.slice(0, 100));
-      console.log(`----- child ${this.constructor.name} -----\n\n`, child, '\n\n', child.getContent().outerHTML.slice(0, 100));
-
-      /**
-      * Временный костыль, чтобы хоть как-то работало
-      */
-      const content = child.getContent().cloneNode(true);
-      stub.replaceWith(content);
-
-      /**
-      * Должно быть так, но не работает :(
-      */
-      // stub.replaceWith(child.getContent());
+      stub.replaceWith(child.getContent());
     });
 
     return templateElement.content;
