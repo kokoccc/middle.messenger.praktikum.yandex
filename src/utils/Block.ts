@@ -89,7 +89,6 @@ export class Block {
     const fragment = this.render();
     const element = fragment.firstElementChild as HTMLElement;
 
-    this._element.innerHTML = '';
     this._element.replaceWith(element);
     this._element = element;
 
