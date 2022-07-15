@@ -52,7 +52,7 @@ const template = `
         {{{ message4 }}}
       </div>
 
-      <div class="chat__messages chat__messages--outcoming flex flex-column align-end gap-3">
+      <div class="chat__messages chat__messages--outcoming flex flex-column align-end gap-3 mt-4">
         {{{ message5 }}}
         {{{ message6 }}}
       </div>
@@ -104,7 +104,7 @@ const elements = {
   }),
   message2: new Message({
     incoming: false,
-    text: 'Упер с работы стол. Ты как поживаешь?',
+    text: 'Упер с работы стол. А ты как поживаешь?',
     time: '12:00',
     read: true,
   }),

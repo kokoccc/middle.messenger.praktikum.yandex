@@ -11,7 +11,12 @@ const template = `
 <article class="
   message relative shadow-sheet
   {{#if incoming}} message--incoming {{else}} message--outcoming {{/if}}
-  {{#if image}} flex {{ else }}px-4 pt-3 pb-2 bg-blue-lightest{{/if}}
+  {{#if image}}
+    flex
+  {{ else }}
+    px-4 pt-3 pb-2
+    {{#if incoming}} bg-gray-lightest {{else}} bg-blue-lightest {{/if}}
+  {{/if}}
 ">
   {{#if image}}
   <img src="{{ image }}" class="message__image">
