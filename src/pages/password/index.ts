@@ -21,7 +21,7 @@ const template = `
   </form>
 </main>`;
 
-const elements = {
+const getElements = () => ({
   linkBack: new LinkBack({
     path: '/profile',
   }),
@@ -47,11 +47,11 @@ const elements = {
     text: 'Сохранить',
     class: 'mt-1 align-self-center',
   }),
-};
+});
 
 export class PagePassword extends Block {
   constructor() {
-    super({ ...elements });
+    super({ ...getElements() });
   }
 
   render() {

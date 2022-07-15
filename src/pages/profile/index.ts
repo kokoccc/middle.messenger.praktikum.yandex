@@ -32,7 +32,7 @@ const template = `
   </section>
 </main>`;
 
-const elements = {
+const getElements = () => ({
   avatar: new Avatar({
     class: 'mx-auto mt-10',
   }),
@@ -81,11 +81,11 @@ const elements = {
     text: 'Сохранить',
     class: 'mt-1 align-self-center',
   }),
-};
+});
 
 export class PageProfile extends Block {
   constructor() {
-    super({ ...elements, elements });
+    super({ ...getElements() });
   }
 
   render() {

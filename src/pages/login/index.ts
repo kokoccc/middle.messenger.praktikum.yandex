@@ -13,7 +13,7 @@ const template = `
   </form>
 </main>`;
 
-const elements = {
+const getElements = () => ({
   tabs: new Tabs({
     isLogin: true,
   }),
@@ -33,11 +33,11 @@ const elements = {
     text: 'Войти',
     class: 'mt-1 align-self-center',
   }),
-};
+});
 
 export class PageLogin extends Block {
   constructor() {
-    super({ ...elements });
+    super({ ...getElements() });
   }
 
   render() {

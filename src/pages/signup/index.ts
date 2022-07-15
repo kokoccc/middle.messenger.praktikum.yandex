@@ -19,7 +19,7 @@ const template = `
   </form>
 </main>`;
 
-const elements = {
+const getElements = () => ({
   tabs: new Tabs({
     isLogin: false,
   }),
@@ -77,11 +77,11 @@ const elements = {
     text: 'Войти',
     class: 'mt-1 align-self-center',
   }),
-};
+});
 
 export class PageSignup extends Block {
   constructor() {
-    super({ ...elements });
+    super({ ...getElements() });
   }
 
   render() {

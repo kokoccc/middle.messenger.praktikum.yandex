@@ -65,7 +65,7 @@ const template = `
 </main>
 `;
 
-const elements = {
+const getElements = () => ({
   search: new Search({
     class: 'flex-grow-1',
   }),
@@ -130,11 +130,11 @@ const elements = {
     time: '12:00',
     sent: true,
   }),
-};
+});
 
 export class PageChats extends Block {
   constructor() {
-    super({ ...elements });
+    super({ ...getElements() });
   }
 
   render() {
