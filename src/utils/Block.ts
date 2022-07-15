@@ -156,8 +156,21 @@ export class Block {
     Object.values(this.children).forEach((child) => {
       const stub = templateElement.content.querySelector(`[data-id="${child.id}"]`) as HTMLElement;
 
+      // @TODO: Разобраться со стабами
+
+      console.log('----- stub -----\n\n', stub, '\n\n', stub.outerHTML);
+      console.log('----- child -----\n\n', child, '\n\n', child.getContent().outerHTML);
+
+      /**
+      * Временный костыль, чтобы хоть как-то работало
+      */
       const content = child.getContent().cloneNode(true);
       stub.replaceWith(content);
+
+      /**
+      * Должно быть так, но не работает :(
+      */
+      // stub.replaceWith(child.getContent());
     });
 
     return templateElement.content;
