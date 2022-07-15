@@ -13,12 +13,14 @@ const getElements = () => ({
     name: 'login',
     placeholder: 'vasyapupkin',
     type: 'text',
+    validate: true,
   }),
   inputPassword: new TextField({
     label: 'Пароль',
     name: 'password',
     placeholder: '••••••••',
     type: 'password',
+    validate: true,
   }),
   button: new Button({
     text: 'Войти',
@@ -28,7 +30,7 @@ const getElements = () => ({
 
 export class PageLogin extends Block {
   constructor() {
-    super({ ...getElements() });
+    super({ ...getElements(), form: '.form--login' });
   }
 
   render() {

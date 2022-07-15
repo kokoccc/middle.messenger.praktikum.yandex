@@ -1,9 +1,0 @@
-{
-  "plugins": {
-    "postcss-import": true,
-    "postcss-calc": true,
-    "postcss-advanced-variables": true,
-    "postcss-nested": true,
-    "postcss-map-get": true
-  }
-}

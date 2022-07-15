@@ -3,7 +3,7 @@ import { Block } from 'utils';
 import './styles.pcss';
 import template from './template.hbs';
 
-interface props {
+interface Props {
   text: string
   type?: string
   class?: string
@@ -11,7 +11,7 @@ interface props {
 }
 
 export class Button extends Block {
-  constructor(props: props) {
+  constructor(props: Props) {
     super({ ...props });
   }
 

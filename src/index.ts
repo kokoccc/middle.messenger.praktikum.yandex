@@ -1,4 +1,3 @@
-import './styles/styles.pcss';
 import { Block, renderDOM } from 'utils';
 import {
   PageChats,
@@ -9,6 +8,8 @@ import {
   PageProfile,
   PageSignup,
 } from 'pages';
+
+import './styles/styles.pcss';
 
 const APP_SELECTOR = '#app';
 

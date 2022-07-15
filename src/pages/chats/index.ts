@@ -3,7 +3,7 @@ import {
   Avatar,
   ChatItem,
   Message,
-  MessageField,
+  MessageForm,
   Search,
 } from 'components';
 
@@ -45,7 +45,7 @@ const getElements = () => ({
     smallest: true,
     imagePath: imagePepe,
   }),
-  messageField: new MessageField(),
+  messageForm: new MessageForm(),
   message1: new Message({
     incoming: false,
     image: imageDesk,
@@ -54,7 +54,7 @@ const getElements = () => ({
   }),
   message2: new Message({
     incoming: false,
-    text: 'Упер с работы стол. А ты как поживаешь?',
+    text: 'Утащил с работы стол. А ты как поживаешь?',
     time: '12:00',
     read: true,
   }),

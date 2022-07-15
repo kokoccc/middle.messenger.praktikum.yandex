@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
-    "dev": "parcel ./src/index.html --no-source-maps --no-cache",
+    "dev": "parcel ./src/index.html --no-source-maps --no-cache --log-level info",
     "build": "run-s clean build:*",
     "build:parcel": "parcel build ./src/index.html --no-cache",
     "server": "node ./server.js",
@@ -52,9 +52,7 @@
     "postcss-nested": "^5.0.6",
     "rimraf": "^3.0.2",
     "stylelint": "^14.9.1",
-    "stylelint-config-standard-scss": "^4.0.0",
-    "url": "^0.11.0",
-    "util": "^0.12.4"
+    "stylelint-config-standard-scss": "^4.0.0"
   },
   "alias": {
     "components": "~/src/components",

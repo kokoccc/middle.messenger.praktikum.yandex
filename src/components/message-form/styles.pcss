@@ -1,21 +1,21 @@
 @import "../../styles/helpers/colors.pcss";
 
-.message-field__file {
+.message-form__file {
   cursor: pointer;
 }
 
-.message-field__file-input {
+.message-form__file-input {
   font-size: 0;
   text-indent: -100px;
   opacity: 0;
   cursor: pointer;
 }
 
-.message-field__file-icon {
+.message-form__file-icon {
   pointer-events: none;
 }
 
-.message-field__input {
+.message-form__input {
   border: 1px solid transparent;
 
   &:focus {
@@ -28,7 +28,7 @@
   }
 }
 
-.message-field__submit {
+.message-form__submit {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -38,4 +38,11 @@
   &:focus {
     background-color: map-get($colors, blue-lightest);
   }
+}
+
+.message-form__error {
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  border-top: 1px solid map-get($colors, gray-lighter);
 }

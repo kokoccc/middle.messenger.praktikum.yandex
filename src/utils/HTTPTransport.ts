@@ -5,19 +5,19 @@ const enum METHODS {
   DELETE = 'DELETE'
 }
 
-type obj = Record<string, unknown>;
-type arr = Array<unknown>;
-type data = Record<string, number | string | obj | arr>
+type Obj = Record<string, unknown>;
+type Arr = Array<unknown>;
+type Data = Record<string, number | string | Obj | Arr>
 
 interface Options {
-  data?: data
+  data?: Data
   headers?: Record<string, unknown>
   method: string,
   timeout?: number
 }
 
-function queryStringify(data: data) {
-  const params = Object.keys(data).reduce((arr: arr, key) => {
+function queryStringify(data: Data) {
+  const params = Object.keys(data).reduce((arr: Arr, key) => {
     const result = `${key}=${data[key].toString()}` as string;
     arr.push(result);
     return arr;

@@ -7,14 +7,14 @@
     {{#if value}} value="{{value}}" {{/if}}
     class="
       ui-text-field__input px-3
-      {{#if success}} ui-text-field__input--success {{/if}}
+      {{!-- {{#if success}} ui-text-field__input--success {{/if}} --}}
       {{#if error}} ui-text-field__input--error {{/if}}
     "
   >
 
   <span class="
     ui-text-field__label flex-full mb-1 mb-md-0 text-right text-body-medium
-    {{#if success}} ui-text-field__label--success {{/if}}
+    {{!-- {{#if success}} ui-text-field__label--success {{/if}} --}}
     {{#if error}} ui-text-field__label--error {{/if}}
   ">
     {{ label }}
@@ -24,7 +24,11 @@
   <span class="ui-text-field__hint flex-full mt-1 text-md-right text-body-medium gray">{{ hint }}</span>
   {{/if}}
 
-  {{#if error}}
+  {{!-- {{#if errorMessage}}
   <span class="ui-text-field__error flex-full mt-1 text-md-right text-body-medium red">{{ errorMessage }}</span>
+  {{/if}} --}}
+
+  {{#if validate}}
+  <span class="ui-text-field__error d-none flex-full mt-1 text-md-right text-body-medium red"></span>
   {{/if}}
 </label>

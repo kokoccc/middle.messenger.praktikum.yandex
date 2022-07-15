@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const express = require('express');
 
@@ -14,6 +13,5 @@ app.get('*', (_, res) => {
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Listening on: http://localhost:${PORT}`);
 });

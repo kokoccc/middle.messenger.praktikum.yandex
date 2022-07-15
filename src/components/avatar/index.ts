@@ -4,7 +4,7 @@ import './styles.pcss';
 import imageAvatarDefault from 'images/avatar.svg';
 import template from './template.hbs';
 
-interface props {
+interface Props {
   class?: string
   imagePath?: string
   small?: boolean
@@ -12,7 +12,7 @@ interface props {
 }
 
 export class Avatar extends Block {
-  constructor(props: props = {}) {
+  constructor(props: Props = {}) {
     super({ imageAvatarDefault, ...props });
   }
 

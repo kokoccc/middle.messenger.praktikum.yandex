@@ -5,7 +5,7 @@ import iconGroup from 'images/group.svg';
 import template from './template.hbs';
 import './styles.pcss';
 
-interface props {
+interface Props {
   date: string
   isActive?: boolean
   isGroup?: boolean
@@ -16,7 +16,7 @@ interface props {
   unreadCount?: number
 }
 
-const getElements = (props: props) => ({
+const getElements = (props: Props) => ({
   avatar: new Avatar({
     small: true,
     imagePath: props.imagePath || '',
@@ -24,7 +24,7 @@ const getElements = (props: props) => ({
 });
 
 export class ChatItem extends Block {
-  constructor(props: props) {
+  constructor(props: Props) {
     super({ iconGroup, ...getElements(props), ...props });
   }
 

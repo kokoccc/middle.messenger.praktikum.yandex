@@ -15,7 +15,7 @@ const getElements = () => ({
   inputOldPassword: new TextField({
     label: 'Текущий пароль',
     name: 'oldPassword',
-    value: 'password',
+    placeholder: '••••••••',
     type: 'password',
   }),
   inputNewPassword: new TextField({
@@ -23,6 +23,7 @@ const getElements = () => ({
     name: 'newPassword',
     placeholder: '••••••••',
     type: 'password',
+    validate: true,
   }),
   inputNewPasswordConfirm: new TextField({
     label: 'Новый пароль (еще раз)',
@@ -38,7 +39,7 @@ const getElements = () => ({
 
 export class PagePassword extends Block {
   constructor() {
-    super({ ...getElements() });
+    super({ ...getElements(), form: 'form--password' });
   }
 
   render() {

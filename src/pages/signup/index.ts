@@ -13,6 +13,7 @@ const getElements = () => ({
     name: 'login',
     placeholder: 'vasyapupkin',
     type: 'text',
+    validate: true,
   }),
   inputDisplayName: new TextField({
     label: 'Имя в чате',
@@ -25,19 +26,22 @@ const getElements = () => ({
     name: 'first_name',
     placeholder: 'Василий',
     type: 'text',
+    validate: true,
   }),
   inputSecondName: new TextField({
     label: 'Фамилия',
     name: 'second_name',
     placeholder: 'Пупкин',
     type: 'text',
+    validate: true,
   }),
   inputPhone: new TextField({
     inputmode: 'tel',
     label: 'Телефон',
     name: 'phone',
-    placeholder: '+7 (903) 111-22-33',
+    placeholder: '+79031112233',
     type: 'tel',
+    validate: true,
   }),
   inputEmail: new TextField({
     inputmode: 'email',
@@ -45,12 +49,14 @@ const getElements = () => ({
     name: 'email',
     placeholder: 'vasya@mail.ru',
     type: 'email',
+    validate: true,
   }),
   inputPassword: new TextField({
     label: 'Пароль',
     name: 'password',
     placeholder: '••••••••',
     type: 'password',
+    validate: true,
   }),
   inputPasswordConfirm: new TextField({
     label: 'Пароль (еще раз)',
@@ -66,7 +72,7 @@ const getElements = () => ({
 
 export class PageSignup extends Block {
   constructor() {
-    super({ ...getElements() });
+    super({ ...getElements(), form: 'form--signup' });
   }
 
   render() {

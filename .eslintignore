@@ -2,3 +2,5 @@
 /node_modules
 /dist
 **/*.min.js
+postcss.config.js
+server.js

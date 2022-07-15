@@ -3,12 +3,12 @@ import { Block } from 'utils';
 import './styles.pcss';
 import template from './template.hbs';
 
-interface props {
+interface Props {
   isLogin: boolean
 }
 
 export class Tabs extends Block {
-  constructor(props: props) {
+  constructor(props: Props) {
     super({ ...props });
   }
 

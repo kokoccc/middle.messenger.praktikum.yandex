@@ -1,5 +1,9 @@
 import { nanoid } from 'nanoid';
+import { validateOnFocus, validateOnBlur, validateOnSubmit } from 'utils';
 import { EventBus } from './EventBus';
+
+type Listener = (arg0: Event) => unknown;
+type Listeners = Record<string, Listener>
 
 const enum EVENTS {
   INIT = 'init',
@@ -14,6 +18,8 @@ export class Block {
   id = '';
   props: Props = {};
   children: Children = {};
+  listeners: Listeners = {};
+  isValueChanged = false;
   eventBus: () => EventBus;
 
   constructor(propsAndChildren = {}) {
@@ -78,16 +84,16 @@ export class Block {
   }
 
   private _render() {
+    this._toggleEventListeners(false);
+
     const fragment = this.render();
     const element = fragment.firstElementChild as HTMLElement;
-
-    this._removeEvents();
 
     this._element.innerHTML = '';
     this._element.replaceWith(element);
     this._element = element;
 
-    this._addEvents();
+    this._toggleEventListeners(true);
   }
 
   private _componentDidMount() {
@@ -106,19 +112,47 @@ export class Block {
     }
   }
 
-  private _addEvents() {
-    const { events = {} } = this.props as Record<string, Listeners>;
+  private _toggleEventListeners(add: boolean) {
+    const {
+      events = {},
+      form,
+      name,
+      validate,
+    } = this.props as Record<string, Listeners>;
+
+    const method = add ? 'addEventListener' : 'removeEventListener';
 
     Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(eventName, events[eventName]);
+      this._element[method](eventName, events[eventName]);
     });
-  }
 
-  private _removeEvents() {
-    const { events = {} } = this.props as Record<string, Listeners>;
+    const isMessageForm = this._element.matches('.message-form');
+    const isStandardForm = form && !isMessageForm;
+    const isTextField = name && !!validate;
 
-    Object.keys(events).forEach((eventName) => {
-      this._element.removeEventListener(eventName, events[eventName]);
+    if (!isMessageForm && !isStandardForm && !isTextField) {
+      return;
+    }
+
+    if (add) {
+      this.listeners = { validateOnFocus, validateOnBlur, validateOnSubmit };
+    }
+
+    if (isMessageForm || isStandardForm) {
+      const formEl = isMessageForm
+        ? this._element
+        : this._element.querySelector('form') as HTMLFormElement;
+
+      if (formEl) {
+        formEl[method]('submit', this.listeners.validateOnSubmit);
+      }
+    }
+
+    const inputElements = this._element.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+
+    inputElements.forEach((inputEl) => {
+      inputEl[method]('focus', this.listeners.validateOnFocus);
+      inputEl[method]('blur', this.listeners.validateOnBlur);
     });
   }
 

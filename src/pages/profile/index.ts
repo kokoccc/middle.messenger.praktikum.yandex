@@ -21,6 +21,7 @@ const getElements = () => ({
     name: 'login',
     type: 'text',
     value: 'vasyapupkin',
+    validate: true,
   }),
   inputDisplayName: new TextField({
     label: 'Имя в чате',
@@ -33,19 +34,22 @@ const getElements = () => ({
     name: 'first_name',
     type: 'text',
     value: 'Василий',
+    validate: true,
   }),
   inputSecondName: new TextField({
     label: 'Фамилия',
     name: 'second_name',
     type: 'text',
     value: 'Пупкин',
+    validate: true,
   }),
   inputPhone: new TextField({
     inputmode: 'tel',
     label: 'Телефон',
     name: 'phone',
     type: 'tel',
-    value: '+7 (903) 111-22-33',
+    value: '+79031112233',
+    validate: true,
   }),
   inputEmail: new TextField({
     inputmode: 'email',
@@ -53,6 +57,7 @@ const getElements = () => ({
     name: 'email',
     type: 'email',
     value: 'vasya@mail.ru',
+    validate: true,
   }),
   button: new Button({
     text: 'Сохранить',
@@ -62,7 +67,7 @@ const getElements = () => ({
 
 export class PageProfile extends Block {
   constructor() {
-    super({ ...getElements() });
+    super({ ...getElements(), form: 'form--profile' });
   }
 
   render() {
