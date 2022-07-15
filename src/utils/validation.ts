@@ -12,7 +12,7 @@ const nameValidations = [
 ];
 
 const passwordValidations = [
-  { regex: /.{8,40}/, message: 'Длина пароля 8 до 40 символов' },
+  { regex: /^.{8,40}$/, message: 'Длина пароля 8 до 40 символов' },
   { regex: /\d/, message: 'Пароль содержать хотя бы одну цифру' },
   { regex: /[A-Z]/, message: 'Пароль должен содержать хотя бы одну заглавную букву' },
 ];
@@ -60,7 +60,7 @@ const validate = (inputEl: HTMLInputElement) => {
     return !regex.test(value);
   });
 
-  errorEl.textContent = errors[0]?.message || '';
+  errorEl.textContent = errors.map((error) => error.message).join('. ');
 
   inputEl?.classList.toggle('ui-text-field__input--error', errors.length > 0);
   labelEl?.classList.toggle('ui-text-field__label--error', errors.length > 0);
