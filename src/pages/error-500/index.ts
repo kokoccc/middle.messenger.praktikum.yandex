@@ -1,5 +1,6 @@
-import './styles.pcss';
 import { LayoutError } from 'layouts';
+
+import './styles.pcss';
 import imageError from 'images/error-500.svg';
 
 const props: Props = {

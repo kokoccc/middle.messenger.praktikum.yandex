@@ -1,5 +1,6 @@
-import './styles.pcss';
 import { Block } from 'utils';
+
+import './styles.pcss';
 import iconClip from 'images/clip.svg';
 import iconEnvelope from 'images/envelope.svg';
 import template from './template.hbs';

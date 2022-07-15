@@ -1,5 +1,6 @@
-import './styles.pcss';
 import { Block } from 'utils';
+
+import './styles.pcss';
 import imageBack from 'images/back.svg';
 import template from './template.hbs';
 

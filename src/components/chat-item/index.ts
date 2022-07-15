@@ -1,8 +1,9 @@
-import './styles.pcss';
 import { Block } from 'utils';
 import { Avatar } from 'components';
+
 import iconGroup from 'images/group.svg';
 import template from './template.hbs';
+import './styles.pcss';
 
 interface props {
   date: string

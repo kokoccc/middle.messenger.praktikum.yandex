@@ -1,5 +1,6 @@
-import './styles.pcss';
 import { Block } from 'utils';
+
+import './styles.pcss';
 import iconSending from './images/sending.svg';
 import iconSendingWhite from './images/sending-white.svg';
 import iconSent from './images/sent.svg';

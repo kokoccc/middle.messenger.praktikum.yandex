@@ -1,4 +1,3 @@
-import './styles.pcss';
 import { Block } from 'utils';
 import {
   Avatar,
@@ -6,6 +5,8 @@ import {
   LinkBack,
   TextField,
 } from 'components';
+
+import './styles.pcss';
 import template from './template.hbs';
 
 const getElements = () => ({

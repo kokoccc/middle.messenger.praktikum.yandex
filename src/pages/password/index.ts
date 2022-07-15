@@ -1,10 +1,11 @@
-import './styles.pcss';
 import { Block } from 'utils';
 import {
   Button,
   LinkBack,
   TextField,
 } from 'components';
+
+import './styles.pcss';
 import template from './template.hbs';
 
 const getElements = () => ({

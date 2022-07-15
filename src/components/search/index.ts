@@ -1,5 +1,6 @@
-import './styles.pcss';
 import { Block } from 'utils';
+
+import './styles.pcss';
 import iconSearch from 'images/search.svg';
 import template from './template.hbs';
 

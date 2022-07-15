@@ -1,4 +1,3 @@
-import './styles.pcss';
 import { Block } from 'utils';
 import {
   Avatar,
@@ -7,6 +6,8 @@ import {
   MessageField,
   Search,
 } from 'components';
+
+import './styles.pcss';
 import imageDesk from 'images/desk.jpg';
 import imageDodge from 'images/dodge.jpg';
 import iconDots from 'images/dots.svg';
