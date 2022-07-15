@@ -1,14 +1,6 @@
 import './styles.pcss';
 import { Block } from 'utils';
-
-const template = `
-<button
-  class="ui-btn px-4 py-2 text-body-medium {{ class }}"
-  {{#if type}} type="{{type}}" {{/if}}
->
-  {{ text }}
-</button>
-`;
+import template from './template.hbs';
 
 interface props {
   text: string

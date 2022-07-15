@@ -1,13 +1,6 @@
 import './styles.pcss';
 import { Block } from 'utils';
-
-const template = `
-<form class="form {{ class }}">
-{{{ inputLogin }}}
-{{{ inputPassword }}}
-{{{ button }}}
-</form>
-`;
+import template from './template.hbs';
 
 interface props {
   class?: string

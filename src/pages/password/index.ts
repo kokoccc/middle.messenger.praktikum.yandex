@@ -5,21 +5,7 @@ import {
   LinkBack,
   TextField,
 } from 'components';
-
-const template = `
-<main class="sheet mx-auto px-10 pt-6 pb-12 shadow-sheet">
-  <header>
-    {{{ linkBack }}}
-    <h1 class="text-title-2 mt-3 text-center">Смена пароля</h1>
-  </header>
-
-  <form class="form form--signup flex flex-column gap-row-5 mt-8">
-    {{{ inputOldPassword }}}
-    {{{ inputNewPassword }}}
-    {{{ inputNewPasswordConfirm }}}
-    {{{ button }}}
-  </form>
-</main>`;
+import template from './template.hbs';
 
 const getElements = () => ({
   linkBack: new LinkBack({

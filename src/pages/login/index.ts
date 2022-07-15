@@ -1,17 +1,7 @@
 import './styles.pcss';
 import { Block } from 'utils';
 import { Button, Tabs, TextField } from 'components';
-
-const template = `
-<main class="sheet mx-auto px-10 py-12 shadow-sheet">
-  <header>{{{ tabs }}}</header>
-
-  <form class="form form--login flex flex-column gap-row-5 mt-8">
-    {{{ inputLogin }}}
-    {{{ inputPassword }}}
-    {{{ button }}}
-  </form>
-</main>`;
+import template from './template.hbs';
 
 const getElements = () => ({
   tabs: new Tabs({

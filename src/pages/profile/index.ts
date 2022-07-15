@@ -6,31 +6,7 @@ import {
   LinkBack,
   TextField,
 } from 'components';
-
-const template = `
-<main class="sheet mx-auto px-10 pt-6 pb-12 shadow-sheet">
-  <header>
-    {{{ linkBack }}}
-    <h1 class="text-title-2 mt-3 text-center">Ваш профиль</h1>
-    {{{ avatar }}}
-  </header>
-
-  <form class="form form--signup flex flex-column gap-row-5 mt-8">
-    {{{ inputLogin }}}
-    {{{ inputDisplayName }}}
-    {{{ inputFirstName }}}
-    {{{ inputSecondName }}}
-    {{{ inputPhone }}}
-    {{{ inputEmail }}}
-    {{{ button }}}
-  </form>
-
-  <section class="mt-6">
-    <a class="text-body-medium blue-dark" href="/password">Сменить пароль</a>
-    <hr class="profile__separator mt-3 bg-gray-lighter">
-    <div class="mt-3 text-body-medium red">Выйти из аккаунта</div>
-  </section>
-</main>`;
+import template from './template.hbs';
 
 const getElements = () => ({
   avatar: new Avatar({

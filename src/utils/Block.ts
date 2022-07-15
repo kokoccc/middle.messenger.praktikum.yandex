@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import Handlebars from 'handlebars';
 import { EventBus } from './EventBus';
 
 const enum EVENTS {
@@ -141,7 +140,7 @@ export class Block {
     return document.createDocumentFragment();
   }
 
-  compile(template: string, props: Props = {}): DocumentFragment {
+  compile(template: (arg0: unknown) => unknown, props: Props = {}): DocumentFragment {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
@@ -149,9 +148,10 @@ export class Block {
     });
 
     const templateElement = document.createElement('template');
-    const compiledBlock = Handlebars.compile(template);
+    templateElement.innerHTML = template(propsAndStubs) as string;
 
-    templateElement.innerHTML = compiledBlock(propsAndStubs);
+    // const compiledBlock = Handlebars.compile(template);
+    // templateElement.innerHTML = compiledBlock(propsAndStubs);
 
     console.warn(this.constructor.name);
 
