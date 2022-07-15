@@ -7,7 +7,7 @@ export function renderDOM(parentSelector: string, block: Block) {
   const childElement = block.getContent() as HTMLElement;
 
   parentElement.appendChild(childElement);
-  // block.dispatchComponentDidMount();
+  block.dispatchComponentDidMount();
 
   return parentElement;
 }

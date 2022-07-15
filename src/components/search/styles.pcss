@@ -1,0 +1,26 @@
+@import "../../styles/helpers/colors.pcss";
+
+.search {
+  height: 36px;
+  border-radius: 4px;
+}
+
+.search__input {
+  border: 1px solid transparent;
+  border-radius: inherit;
+
+  &:focus {
+    border-color: map-get($colors, blue);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: map-get($colors, gray);
+  }
+}
+
+.search__icon {
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}

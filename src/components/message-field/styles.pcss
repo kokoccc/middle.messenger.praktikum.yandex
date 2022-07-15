@@ -1,0 +1,41 @@
+@import "../../styles/helpers/colors.pcss";
+
+.message-field__file {
+  cursor: pointer;
+}
+
+.message-field__file-input {
+  font-size: 0;
+  text-indent: -100px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.message-field__file-icon {
+  pointer-events: none;
+}
+
+.message-field__input {
+  border: 1px solid transparent;
+
+  &:focus {
+    border-color: map-get($colors, blue);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: map-get($colors, gray);
+  }
+}
+
+.message-field__submit {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 100ms ease-out;
+
+  &:hover,
+  &:focus {
+    background-color: map-get($colors, blue-lightest);
+  }
+}

@@ -1,25 +1,33 @@
 import './styles/styles.pcss';
 import { Block, renderDOM } from 'utils';
-import PageError404 from './pages/error-404';
-import PageError500 from './pages/error-500';
-
-type block = { new(): Block };
-type pageData = Record<string, string | block>;
+import {
+  PageChats,
+  PageError404,
+  PageError500,
+  PageLogin,
+  PagePassword,
+  PageProfile,
+  PageSignup,
+} from 'pages';
 
 const APP_SELECTOR = '#app';
 
-const pages: Record<string | number, pageData> = {
-  404: { title: 'Страница не найдена', page: PageError404 },
-  500: { title: 'Ошибка сервера', page: PageError500 },
-  // login: { title: 'Авторизация', page: PageLogin },
+const pages: Record<number | string, { new(): Block }> = {
+  '': PageChats,
+  404: PageError404,
+  500: PageError500,
+  chats: PageChats,
+  login: PageLogin,
+  password: PagePassword,
+  profile: PageProfile,
+  signup: PageSignup,
 };
 
 const renderPage = (): void => {
   const pathname = window.location.pathname.replace(/^\/|\/$/g, '');
-  const page = pathname in pages ? pages[pathname] : pages[404];
-  const PageBlock = page.page as block;
+  const Page = pages[pathname] || pages['404'];
 
-  renderDOM(APP_SELECTOR, new PageBlock());
+  renderDOM(APP_SELECTOR, new Page());
 };
 
 document.addEventListener('DOMContentLoaded', renderPage);

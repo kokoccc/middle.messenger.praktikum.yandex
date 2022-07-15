@@ -1,0 +1,20 @@
+@import "../../styles/helpers/colors.pcss";
+
+.avatar-wrapper {
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  object-fit: scale-down;
+  border: 1px solid map-get($colors, gray-lighter);
+  border-radius: 50%;
+
+  &--small {
+    width: 52px;
+    height: 52px;
+  }
+
+  &--smallest {
+    width: 40px;
+    height: 40px;
+  }
+}

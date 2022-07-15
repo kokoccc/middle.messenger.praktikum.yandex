@@ -1,0 +1,27 @@
+@import "../../styles/helpers/colors.pcss";
+
+.chat-item {
+  border-top: 1px solid map-get($colors, gray-lighter);
+  transition: background-color 100ms ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: map-get($colors, blue-lightest);
+  }
+
+  &--active {
+    cursor: default;
+  }
+}
+
+.chat-item__message {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chat-item__unread {
+  padding: 1px 8px;
+  line-heigth: 1;
+  border-radius: 12px;
+}

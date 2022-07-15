@@ -1,1 +1,15 @@
-export { PageError500 as default } from './error-500';
+import './styles.pcss';
+import { LayoutError } from 'layouts';
+import imageError from 'images/error-500.svg';
+
+const props: Props = {
+  title: 'Ошибка сервера',
+  subtitle: 'Уже исправляем',
+  image: imageError,
+};
+
+export class PageError500 extends LayoutError {
+  constructor() {
+    super({ ...props });
+  }
+}

@@ -53,6 +53,10 @@
   line-height: 16px;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .text-center {
   text-align: center;
 }
@@ -63,4 +67,22 @@
 
 .text-italic {
   font-style: italic;
+}
+
+@include desktop {
+  .text-md-left {
+    text-align: left;
+  }
+
+  .text-md-center {
+    text-align: center;
+  }
+
+  .text-md-right {
+    text-align: right;
+  }
+
+  .text-md-italic {
+    font-style: italic;
+  }
 }

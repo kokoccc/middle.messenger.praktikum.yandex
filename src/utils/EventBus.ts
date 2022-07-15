@@ -1,4 +1,4 @@
-type Listener = (...args: unknown[]) => void;
+type Listener<T extends unknown[] = Props[]> = (...args: T) => void;
 
 export class EventBus {
   private listeners: Record<string, Listener[]> = {};
@@ -21,13 +21,13 @@ export class EventBus {
     );
   }
 
-  emit(event: string, data?: unknown): void {
+  emit(event: string, ...args: Props[]): void {
     if (!this.listeners[event]) {
       throw new Error(`Event does not exist: ${event}`);
     }
 
     this.listeners[event].forEach((listener) => {
-      listener(data);
+      listener(...args);
     });
   }
 }
