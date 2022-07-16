@@ -8,8 +8,6 @@ interface Props {
   class?: string
   imagePath?: string
   size?: string
-  small?: boolean
-  smallest?: boolean
 }
 
 export class Avatar extends Block {
