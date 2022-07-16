@@ -1,0 +1,35 @@
+@import "../../styles/helpers/colors.pcss";
+
+.ui-btn {
+  min-width: 100px;
+  min-height: 44px;
+  color: map-get($colors, white);
+  background-color: map-get($colors, blue);
+  border: 1px solid map-get($colors, blue);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.ui-btn--outlined {
+    color: map-get($colors, blue);
+    background-color: map-get($colors, white);
+  }
+}
+
+.ui-btn--block {
+  width: 100%;
+}
+
+.ui-btn--secondary {
+  color: map-get($colors, gray-darkest);
+  background-color: map-get($colors, gray-lighter);
+  border-color: map-get($colors, gray-lighter);
+
+  &.ui-btn--outlined {
+    color: map-get($colors, gray-darkest);
+  }
+}
+
+.ui-btn--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

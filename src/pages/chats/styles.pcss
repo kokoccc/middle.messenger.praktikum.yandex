@@ -1,0 +1,55 @@
+@import "../../styles/helpers/colors.pcss";
+
+.chats-page {
+  max-width: 1400px;
+  border-left: 1px solid map-get($colors, gray-lighter);
+  border-right: 1px solid map-get($colors, gray-lighter);
+}
+
+.sidebar {
+  flex: 0 420px;
+  border-right: 1px solid map-get($colors, gray-lighter);
+}
+
+.sidebar__menu-button,
+.chat__menu-button {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 100ms ease-out;
+
+  &:hover {
+    background-color: map-get($colors, gray-lightest);
+  }
+}
+
+.chat {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chat__header {
+  border-bottom: 1px solid map-get($colors, gray-lighter);
+}
+
+.chat__window {
+  overflow: auto;
+}
+
+.chat__footer {
+  border-top: 1px solid map-get($colors, gray-lighter);
+}
+
+.chat__date {
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    top: 50%;
+    height: 1px;
+    background-color: map-get($colors, gray-lighter);
+  }
+}

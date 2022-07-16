@@ -1,0 +1,14 @@
+<div class="
+  flex-shrink-0
+  avatar-wrapper
+  flex bg-gray-lightest
+  {{#if size}} avatar-wrapper--{{ size }} {{/if}}
+  {{#unless imagePath}} p-2 {{/unless}}
+  {{ class }}
+">
+  <img
+    class="avatar m-auto"
+    src="{{#if imagePath}}{{ imagePath }}{{else}}{{ imageAvatarDefault }}{{/if}}"
+    alt=""
+  >
+</div>

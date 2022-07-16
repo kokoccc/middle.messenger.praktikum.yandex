@@ -1,0 +1,49 @@
+<main class="chats-page flex-full flex mx-auto shadow-sheet">
+  <aside class="sidebar bg-gray-lightest">
+    <header class="flex align-center gap-2 px-3 py-2">
+      <button class="sidebar__menu-button flex pa-3">
+        <img src="{{ iconMenu }}" class="m-auto">
+      </button>
+      {{{ search }}}
+    </header>
+
+    <nav class="chats">
+      {{{ chatItem1 }}}
+      {{{ chatItem2 }}}
+      {{{ chatItem3 }}}
+    </nav>
+  </aside>
+
+  <section class="chat flex-grow-1 flex flex-column">
+    <header class="chat__header flex-grow-0 flex align-center gap-3 px-4 py-2">
+      {{{ avatar }}}
+      <span class="text-body-medium">Олег</span>
+      <button class="chat__menu-button flex ml-auto pa-3">
+        <img src="{{ iconDots }}" class="m-auto">
+      </button>
+    </header>
+
+    <section class="chat__window flex-grow-1 px-4 py-6">
+      <div class="chat__messages chat__messages--outcoming flex flex-column align-end gap-3">
+        {{{ message1 }}}
+        {{{ message2 }}}
+      </div>
+
+      <div class="chat__date flex align-center gap-3 mt-5 mb-4 text-center text-caption-medium gray">01 Фев 2022</div>
+
+      <div class="chat__messages chat__messages--outcoming flex flex-column align-start gap-3">
+        {{{ message3 }}}
+        {{{ message4 }}}
+      </div>
+
+      <div class="chat__messages chat__messages--outcoming flex flex-column align-end gap-3 mt-4">
+        {{{ message5 }}}
+        {{{ message6 }}}
+      </div>
+    </section>
+
+    <footer class="chat__footer flex-grow-0">
+      {{{ messageForm }}}
+    </footer>
+  </section>
+</main>

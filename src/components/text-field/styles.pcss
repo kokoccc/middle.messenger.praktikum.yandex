@@ -1,0 +1,73 @@
+@import "../../styles/helpers/media.pcss";
+@import "../../styles/helpers/colors.pcss";
+
+.ui-text-field {
+  --color: map-get($colors, gray-lighter);
+  --color-focus: map-get($colors, blue);
+
+  &--error {
+    --color: map-get($colors, red);
+    --color-focus: var(--color);
+  }
+}
+
+.ui-text-field__label {
+  order: -1;
+}
+
+.ui-text-field__input {
+  height: 36px;
+  outline: none;
+
+  &:focus {
+    border-color: var(--color-focus);
+  }
+}
+
+@include mobile {
+  .ui-text-field__label {
+    flex: 100%;
+    display: flex;
+    align-items: center;
+    border: none;
+  }
+
+  .ui-text-field__input {
+    flex: 100%;
+    border: 1px solid var(--color);
+    border-radius: 4px;
+  }
+}
+
+@include desktop {
+  .ui-text-field__label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color);
+  }
+
+  .ui-text-field__input {
+    flex: 0 240px;
+    border: 1px solid var(--color);
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-radius: 4px 4px 0 0;
+
+    &:focus {
+      border-bottom-right-radius: 4px;
+
+      & + .ui-text-field__label {
+        border-color: var(--color-focus);
+      }
+    }
+  }
+
+  .ui-text-field--error {
+    .ui-text-field__input {
+      border: 1px solid var(--color);
+      border-bottom-right-radius: 4px;
+    }
+  }
+}
