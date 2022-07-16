@@ -17,10 +17,5 @@
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "999.999.999" // Fix ESLint React warning
-    }
   }
 }
