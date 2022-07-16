@@ -11,7 +11,7 @@ export class MessageForm extends Block {
       iconClip,
       iconEnvelope,
       ...props,
-      form: 'message-form',
+      formSelector: '.message-form',
     });
   }
 

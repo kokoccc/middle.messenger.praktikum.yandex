@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import { Button, Tabs, TextField } from 'components';
 
 import './styles.pcss';
@@ -13,7 +13,9 @@ const getElements = () => ({
     name: 'login',
     placeholder: 'vasyapupkin',
     type: 'text',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.login,
+    },
   }),
   inputDisplayName: new TextField({
     label: 'Имя в чате',
@@ -26,14 +28,18 @@ const getElements = () => ({
     name: 'first_name',
     placeholder: 'Василий',
     type: 'text',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.name,
+    },
   }),
   inputSecondName: new TextField({
     label: 'Фамилия',
     name: 'second_name',
     placeholder: 'Пупкин',
     type: 'text',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.name,
+    },
   }),
   inputPhone: new TextField({
     inputmode: 'tel',
@@ -41,7 +47,9 @@ const getElements = () => ({
     name: 'phone',
     placeholder: '+79031112233',
     type: 'tel',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.phone,
+    },
   }),
   inputEmail: new TextField({
     inputmode: 'email',
@@ -49,14 +57,18 @@ const getElements = () => ({
     name: 'email',
     placeholder: 'vasya@mail.ru',
     type: 'email',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.email,
+    },
   }),
   inputPassword: new TextField({
     label: 'Пароль',
     name: 'password',
     placeholder: '••••••••',
     type: 'password',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.password,
+    },
   }),
   inputPasswordConfirm: new TextField({
     label: 'Пароль (еще раз)',
@@ -72,7 +84,7 @@ const getElements = () => ({
 
 export class PageSignup extends Block {
   constructor() {
-    super({ ...getElements(), form: 'form--signup' });
+    super({ ...getElements(), formSelector: '.form--signup' });
   }
 
   render() {

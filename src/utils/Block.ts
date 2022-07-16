@@ -1,9 +1,15 @@
 import { nanoid } from 'nanoid';
-import { validateOnFocus, validateOnBlur, validateOnSubmit } from 'utils';
+import { validateOnBlur, validateOnFocus, validateOnSubmit } from 'utils';
 import { EventBus } from './EventBus';
 
 type Listener = (arg0: Event) => unknown;
 type Listeners = Record<string, Listener>
+
+interface ListenerProps {
+  events?: Listeners
+  formSelector?: string
+  validation?: ValidationProps
+}
 
 const enum EVENTS {
   INIT = 'init',
@@ -113,11 +119,10 @@ export class Block {
 
   private _toggleEventListeners(add: boolean) {
     const {
+      formSelector,
       events = {},
-      form,
-      name,
-      validate,
-    } = this.props as Record<string, Listeners>;
+      validation,
+    }: ListenerProps = this.props;
 
     const method = add ? 'addEventListener' : 'removeEventListener';
 
@@ -125,34 +130,33 @@ export class Block {
       this._element[method](eventName, events[eventName]);
     });
 
-    const isMessageForm = this._element.matches('.message-form');
-    const isStandardForm = form && !isMessageForm;
-    const isTextField = name && !!validate;
+    if (formSelector) {
+      if (add) {
+        this.listeners.validateOnSubmit = (event: Event) => validateOnSubmit(event);
+      }
 
-    if (!isMessageForm && !isStandardForm && !isTextField) {
-      return;
-    }
-
-    if (add) {
-      this.listeners = { validateOnFocus, validateOnBlur, validateOnSubmit };
-    }
-
-    if (isMessageForm || isStandardForm) {
-      const formEl = isMessageForm
+      const formEl = this._element.matches(formSelector)
         ? this._element
-        : this._element.querySelector('form') as HTMLFormElement;
+        : this._element.querySelector(formSelector);
 
       if (formEl) {
         formEl[method]('submit', this.listeners.validateOnSubmit);
       }
     }
 
-    const inputElements = this._element.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+    if (validation) {
+      if (add) {
+        this.listeners.validateOnBlur = (event: Event) => validateOnBlur(event, validation);
+        this.listeners.validateOnFocus = (event: Event) => validateOnFocus(event, validation);
+      }
 
-    inputElements.forEach((inputEl) => {
-      inputEl[method]('focus', this.listeners.validateOnFocus);
-      inputEl[method]('blur', this.listeners.validateOnBlur);
-    });
+      const inputElements = this._element.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+
+      inputElements.forEach((inputEl) => {
+        inputEl[method]('blur', this.listeners.validateOnBlur);
+        inputEl[method]('focus', this.listeners.validateOnFocus);
+      });
+    }
   }
 
   init() {

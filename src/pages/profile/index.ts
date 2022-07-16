@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import {
   Avatar,
   Button,
@@ -21,7 +21,9 @@ const getElements = () => ({
     name: 'login',
     type: 'text',
     value: 'vasyapupkin',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.login,
+    },
   }),
   inputDisplayName: new TextField({
     label: 'Имя в чате',
@@ -34,14 +36,18 @@ const getElements = () => ({
     name: 'first_name',
     type: 'text',
     value: 'Василий',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.name,
+    },
   }),
   inputSecondName: new TextField({
     label: 'Фамилия',
     name: 'second_name',
     type: 'text',
     value: 'Пупкин',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.name,
+    },
   }),
   inputPhone: new TextField({
     inputmode: 'tel',
@@ -49,7 +55,9 @@ const getElements = () => ({
     name: 'phone',
     type: 'tel',
     value: '+79031112233',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.phone,
+    },
   }),
   inputEmail: new TextField({
     inputmode: 'email',
@@ -57,7 +65,9 @@ const getElements = () => ({
     name: 'email',
     type: 'email',
     value: 'vasya@mail.ru',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.email,
+    },
   }),
   button: new Button({
     text: 'Сохранить',
@@ -67,7 +77,7 @@ const getElements = () => ({
 
 export class PageProfile extends Block {
   constructor() {
-    super({ ...getElements(), form: 'form--profile' });
+    super({ ...getElements(), formSelector: '.form--profile' });
   }
 
   render() {

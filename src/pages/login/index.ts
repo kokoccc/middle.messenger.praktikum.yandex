@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import { Button, Tabs, TextField } from 'components';
 
 import './styles.pcss';
@@ -13,14 +13,18 @@ const getElements = () => ({
     name: 'login',
     placeholder: 'vasyapupkin',
     type: 'text',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.login,
+    },
   }),
   inputPassword: new TextField({
     label: 'Пароль',
     name: 'password',
     placeholder: '••••••••',
     type: 'password',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.password,
+    },
   }),
   button: new Button({
     text: 'Войти',
@@ -30,7 +34,7 @@ const getElements = () => ({
 
 export class PageLogin extends Block {
   constructor() {
-    super({ ...getElements(), form: '.form--login' });
+    super({ ...getElements(), formSelector: '.form--login' });
   }
 
   render() {

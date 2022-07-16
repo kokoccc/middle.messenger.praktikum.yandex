@@ -1,91 +1,89 @@
-interface ValidationRule {
-  regex: RegExp
-  message: string
-  negative?: boolean
+interface FieldToggler {
+  inputEl: HTMLInputElement
+  parentClassName: string
+  errorMessages: string[]
+  isValid: boolean
 }
 
-type Validations = Record<string, ValidationRule[]>;
+const toggleField = ({
+  inputEl,
+  parentClassName,
+  errorMessages,
+  isValid,
+}: FieldToggler) => {
+  const parentEl = inputEl.closest(`.${parentClassName}`) as HTMLElement;
+  const errorEl = parentEl.querySelector(`.${parentClassName}__error`);
 
-const nameValidations = [
-  { regex: /^[A-Za-zА-Яа-я-]+$/, message: 'Формат: латиница или кириллица, без пробелов и без цифр, нет спецсимволов (допустим только дефис)' },
-  { regex: /^[A-ZА-Я]/, message: 'Первая буква должна быть заглавной' },
-];
+  if (parentEl && errorEl) {
+    parentEl.classList.toggle(`${parentClassName}--error`, !isValid);
 
-const passwordValidations = [
-  { regex: /^.{8,40}$/, message: 'Длина пароля 8 до 40 символов' },
-  { regex: /\d/, message: 'Пароль содержать хотя бы одну цифру' },
-  { regex: /[A-Z]/, message: 'Пароль должен содержать хотя бы одну заглавную букву' },
-];
-
-const validations: Validations = {
-  email: [{
-    regex: /^[\w\-_]+@[a-z]+\.[a-z]+$/,
-    message: 'Некорректный e-mail. Разрешенные символы: латиница, цифры, дефис, нижнее подчеркивание. Должна быть "собака" (@) и точка после неё, но перед точкой обязательно должны быть буквы. Пример: hello123@gmail.com',
-  }],
-  first_name: nameValidations,
-  login: [
-    { regex: /^.{3,20}$/, message: 'Длина логина от 3 до 20 символов' },
-    { regex: /^[A-Za-z\d_-]+$/, message: 'В логине допустимы только латиница, цифры, дефис или нижнее подчеркивание' },
-    { regex: /^\d+$/, message: 'Логин может содержать цифры, но не должен состоять полностью из них', negative: true },
-  ],
-  message: [{ regex: /./, message: 'Введите текст сообщения' }],
-  newPassword: passwordValidations,
-  phone: [{ regex: /^\+?\d{10,15}$/, message: 'Телефон должен состоять из 10-15 цифр, а также содержать плюс в начале' }],
-  password: passwordValidations,
-  second_name: nameValidations,
+    errorEl.textContent = errorMessages.join('. ');
+    errorEl.classList.toggle('d-none', isValid);
+  }
 };
 
-const validate = (inputEl: HTMLInputElement) => {
-  const parentEl = inputEl.closest('.ui-text-field, .message-form') as HTMLElement;
-  const labelEl = parentEl.querySelector('.ui-text-field__label') as HTMLElement;
-  const errorEl = parentEl.querySelector('.ui-text-field__error, .message-form__error') as HTMLElement;
+const validateInput = (event: Event, {
+  rules,
+  parentClassName = 'ui-text-field',
+}: ValidationProps) => {
+  const inputEl = event.target as HTMLInputElement;
+  const { value }: { value: string } = inputEl;
 
-  const { name, value } = inputEl;
+  const errorMessages = rules.reduce((arr: string[], { regex, negative, message }) => {
+    const isRegexTestPassed = regex.test(value);
+    const isFailed = negative ? isRegexTestPassed : !isRegexTestPassed;
 
-  if (!name) {
-    return;
-  }
+    return isFailed ? arr.concat(message) : arr;
+  }, []);
 
-  const rules = validations[name] as unknown as ValidationRule[];
+  const isValid = errorMessages.length === 0;
 
-  if (!rules) {
-    return;
-  }
-
-  const errors = rules.filter(({ regex, negative = false }) => {
-    if (negative) {
-      return regex.test(value);
-    }
-
-    return !regex.test(value);
+  toggleField({
+    inputEl,
+    parentClassName,
+    errorMessages,
+    isValid,
   });
-
-  errorEl.textContent = errors.map((error) => error.message).join('. ');
-
-  inputEl?.classList.toggle('ui-text-field__input--error', errors.length > 0);
-  labelEl?.classList.toggle('ui-text-field__label--error', errors.length > 0);
-  errorEl?.classList.toggle('d-none', errors.length === 0);
 };
 
-export const onSubmit = (event: Event) => {
+const validateForm = (event: Event) => {
   event.preventDefault();
 
   const formEl = event.target as HTMLFormElement;
   const formData = Object.fromEntries(new FormData(formEl));
 
+  const inputs = formEl.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+
+  inputs.forEach((inputEl) => {
+    inputEl.dispatchEvent(new Event('blur'));
+  });
+
   // eslint-disable-next-line no-console
   console.log(formData);
-
-  const inputs = formEl.querySelectorAll('input');
-  inputs.forEach(validate);
 };
 
-export const onBlur = (event: Event) => {
-  const inputEl = event.target as HTMLInputElement;
-  validate(inputEl);
+export const globalValidationRules = {
+  email: [{
+    regex: /^[\w\-_]+@[a-z]+\.[a-z]+$/,
+    message: 'Некорректный e-mail. Разрешенные символы: латиница, цифры, дефис, нижнее подчеркивание. Должна быть "собака" (@) и точка после неё, но перед точкой обязательно должны быть буквы. Пример: hello123@gmail.com',
+  }],
+  login: [
+    { regex: /^.{3,20}$/, message: 'Длина логина от 3 до 20 символов' },
+    { regex: /^[A-Za-z\d_-]+$/, message: 'В логине допустимы только латиница, цифры, дефис или нижнее подчеркивание' },
+    { regex: /^\d+$/, message: 'Логин может содержать цифры, но не должен состоять полностью из них', negative: true },
+  ],
+  name: [
+    { regex: /^[A-Za-zА-Яа-я-]+$/, message: 'Формат: латиница или кириллица, без пробелов и без цифр, нет спецсимволов (допустим только дефис)' },
+    { regex: /^[A-ZА-Я]/, message: 'Первая буква должна быть заглавной' },
+  ],
+  password: [
+    { regex: /^.{8,40}$/, message: 'Длина пароля 8 до 40 символов' },
+    { regex: /\d/, message: 'Пароль содержать хотя бы одну цифру' },
+    { regex: /[A-Z]/, message: 'Пароль должен содержать хотя бы одну заглавную букву' },
+  ],
+  phone: [{ regex: /^\+?\d{10,15}$/, message: 'Телефон должен состоять из 10-15 цифр, а также содержать плюс в начале' }],
 };
 
-export const onFocus = (event: Event) => {
-  const inputEl = event.target as HTMLInputElement;
-  validate(inputEl);
-};
+export const validateOnBlur = validateInput;
+export const validateOnFocus = validateInput;
+export const validateOnSubmit = validateForm;

@@ -1,4 +1,4 @@
-import { Block } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import {
   Button,
   LinkBack,
@@ -23,7 +23,9 @@ const getElements = () => ({
     name: 'newPassword',
     placeholder: '••••••••',
     type: 'password',
-    validate: true,
+    validation: {
+      rules: globalValidationRules.password,
+    },
   }),
   inputNewPasswordConfirm: new TextField({
     label: 'Новый пароль (еще раз)',
@@ -39,7 +41,7 @@ const getElements = () => ({
 
 export class PagePassword extends Block {
   constructor() {
-    super({ ...getElements(), form: 'form--password' });
+    super({ ...getElements(), formSelector: '.form--password' });
   }
 
   render() {

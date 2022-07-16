@@ -13,9 +13,8 @@ interface Props {
   label: string
   name?: string
   placeholder?: string
-  success?: boolean
   type: string
-  validate?: boolean
+  validation?: unknown,
   value?: string
 }
 
