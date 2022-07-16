@@ -18,7 +18,7 @@ interface Options {
 
 function queryStringify(data: Data) {
   const params = Object.keys(data).reduce((arr: Arr, key) => {
-    const result = `${key}=${data[key].toString()}` as string;
+    const result = `${key}=${data[key].toString()}`;
     arr.push(result);
     return arr;
   }, []).join('&');

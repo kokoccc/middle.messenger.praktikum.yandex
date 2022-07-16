@@ -18,8 +18,8 @@ interface Props {
 
 const getElements = (props: Props) => ({
   avatar: new Avatar({
-    small: true,
     imagePath: props.imagePath || '',
+    size: 'small',
   }),
 });
 

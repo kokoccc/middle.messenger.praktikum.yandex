@@ -42,8 +42,8 @@ const getElements = () => ({
     unreadCount: 1,
   }),
   avatar: new Avatar({
-    smallest: true,
     imagePath: imagePepe,
+    size: 'smallest',
   }),
   messageForm: new MessageForm(),
   message1: new Message({

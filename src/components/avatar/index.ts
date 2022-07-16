@@ -7,6 +7,7 @@ import template from './template.hbs';
 interface Props {
   class?: string
   imagePath?: string
+  size?: string
   small?: boolean
   smallest?: boolean
 }
