@@ -8,7 +8,7 @@
 
 [Приложение на Netlify](https://soft-frangipane-46bdc2.netlify.app/)
 
-Страницы:
+Страницы:  
 [/](https://soft-frangipane-46bdc2.netlify.app/) или [/chats](https://soft-frangipane-46bdc2.netlify.app/chats) — список чатов  
 [/login](https://soft-frangipane-46bdc2.netlify.app/login) — авторизация  
 [/signup](https://soft-frangipane-46bdc2.netlify.app/signup) — регистрация  
