@@ -2,10 +2,8 @@
 
 ## О проекте
 
-Проект в рамках Яндекс Практикума. [Макет в Figma](https://www.figma.com/file/bz3fUfefTOGr6PPyeUTwxR/YaChat?node-id=5%3A895)
-
-Пулреквесты: [#1](https://github.com/kokoccc/middle.messenger.praktikum.yandex/pull/1), [#2](https://github.com/kokoccc/middle.messenger.praktikum.yandex/pull/2)
-
+Проект в рамках Яндекс Практикума. [Макет в Figma](https://www.figma.com/file/bz3fUfefTOGr6PPyeUTwxR/YaChat?node-id=5%3A895)  
+Пулреквесты: [#1](https://github.com/kokoccc/middle.messenger.praktikum.yandex/pull/1), [#2](https://github.com/kokoccc/middle.messenger.praktikum.yandex/pull/2)  
 [Приложение на Netlify](https://soft-frangipane-46bdc2.netlify.app/)
 
 Страницы:  
