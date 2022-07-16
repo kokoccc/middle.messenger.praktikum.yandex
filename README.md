@@ -9,12 +9,12 @@
 [Приложение на Netlify](https://soft-frangipane-46bdc2.netlify.app/)
 
 Страницы:
-[/](https://soft-frangipane-46bdc2.netlify.app/) или [/chats](https://soft-frangipane-46bdc2.netlify.app/chats) — список чатов
-[/login](https://soft-frangipane-46bdc2.netlify.app/login) — авторизация
-[/signup](https://soft-frangipane-46bdc2.netlify.app/signup) — регистрация
-[/profile](https://soft-frangipane-46bdc2.netlify.app/profile) — профиль
-[/password](https://soft-frangipane-46bdc2.netlify.app/password) — смена пароля
-[/404](https://soft-frangipane-46bdc2.netlify.app/404) — ошибка 404
+[/](https://soft-frangipane-46bdc2.netlify.app/) или [/chats](https://soft-frangipane-46bdc2.netlify.app/chats) — список чатов  
+[/login](https://soft-frangipane-46bdc2.netlify.app/login) — авторизация  
+[/signup](https://soft-frangipane-46bdc2.netlify.app/signup) — регистрация  
+[/profile](https://soft-frangipane-46bdc2.netlify.app/profile) — профиль  
+[/password](https://soft-frangipane-46bdc2.netlify.app/password) — смена пароля  
+[/404](https://soft-frangipane-46bdc2.netlify.app/404) — ошибка 404  
 [/500](https://soft-frangipane-46bdc2.netlify.app/500) — ошибка 500
 
 
