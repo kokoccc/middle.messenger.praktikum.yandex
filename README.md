@@ -20,7 +20,7 @@
 
 - Parcel
 - Handlebars + Parcel Transformer
-- Typescript
+- TypeScript
 - PostCSS
 - Express
 - ESLint

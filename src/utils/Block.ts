@@ -1,6 +1,10 @@
 import { nanoid } from 'nanoid';
-import { validateOnBlur, validateOnFocus, validateOnSubmit } from 'utils';
-import { EventBus } from './EventBus';
+import {
+  EventBus,
+  validateOnBlur,
+  validateOnFocus,
+  validateOnSubmit,
+} from 'utils';
 
 type Listener = (arg0: Event) => unknown;
 type Listeners = Record<string, Listener>
