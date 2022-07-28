@@ -1,7 +1,7 @@
-export { PageChats } from './chats';
-export { PageError404 } from './error-404';
-export { PageError500 } from './error-500';
-export { PageLogin } from './login';
-export { PagePassword } from './password';
-export { PageSettings } from './settings';
-export { PageSignUp } from './sign-up';
+export { PageChats } from './Chats/Chats';
+export { PageError404 } from './Error404/Error404';
+export { PageError500 } from './Error500/Error500';
+export { PageLogin } from './Login/Login';
+export { PagePassword } from './Password/Password';
+export { PageSettings } from './Settings/Settings';
+export { PageSignUp } from './SignUp/SignUp';

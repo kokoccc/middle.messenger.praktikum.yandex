@@ -1,0 +1,35 @@
+import { Block } from 'utils';
+import { Avatar } from 'components';
+
+import iconGroup from 'images/group.svg';
+import template from './Button.hbs';
+
+import './Button.pcss';
+
+interface Props {
+  date: string
+  isActive?: boolean
+  isGroup?: boolean
+  title: string
+  imagePath?: string
+  name?: string
+  message: string,
+  unreadCount?: number
+}
+
+const getElements = (props: Props) => ({
+  avatar: new Avatar({
+    imagePath: props.imagePath || '',
+    size: 'small',
+  }),
+});
+
+export class ChatItem extends Block {
+  constructor(props: Props) {
+    super({ iconGroup, ...getElements(props), ...props });
+  }
+
+  render() {
+    return this.compile(template, this.props);
+  }
+}
