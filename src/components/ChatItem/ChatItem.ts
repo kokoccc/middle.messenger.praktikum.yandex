@@ -2,9 +2,9 @@ import { Block } from 'utils';
 import { Avatar } from 'components';
 
 import iconGroup from 'images/group.svg';
-import template from './Button.hbs';
+import template from './ChatItem.hbs';
 
-import './Button.pcss';
+import './ChatItem.pcss';
 
 interface Props {
   date: string
