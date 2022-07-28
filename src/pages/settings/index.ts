@@ -75,9 +75,9 @@ const getElements = () => ({
   }),
 });
 
-export class PageProfile extends Block {
+export class PageSettings extends Block {
   constructor() {
-    super({ ...getElements(), formSelector: '.form--profile' });
+    super({ ...getElements(), formSelector: '.form--settings' });
   }
 
   render() {

@@ -57,6 +57,7 @@
   },
   "alias": {
     "components": "~/src/components",
+    "helpers": "~/src/helpers",
     "images": "~/src/images",
     "layouts": "~/src/layouts",
     "pages": "~/src/pages",

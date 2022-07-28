@@ -210,4 +210,12 @@ export class Block {
 
     Object.assign(this.props, nextProps);
   };
+
+  show() {
+    this.getContent().classList.remove('d-none');
+  }
+
+  hide() {
+    this.getContent().classList.add('d-none');
+  }
 }

@@ -82,9 +82,9 @@ const getElements = () => ({
   }),
 });
 
-export class PageSignup extends Block {
+export class PageSignUp extends Block {
   constructor() {
-    super({ ...getElements(), formSelector: '.form--signup' });
+    super({ ...getElements(), formSelector: '.form--sign-up' });
   }
 
   render() {

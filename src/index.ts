@@ -1,34 +1,26 @@
-import { Block, renderDOM } from 'utils';
+import { Router } from 'utils';
 import {
   PageChats,
   PageError404,
   PageError500,
   PageLogin,
+  PageSettings,
   PagePassword,
-  PageProfile,
-  PageSignup,
+  PageSignUp,
 } from 'pages';
 
 import './styles/styles.pcss';
 
 const APP_SELECTOR = '#app';
 
-const pages: Record<number | string, { new(): Block }> = {
-  '': PageChats,
-  404: PageError404,
-  500: PageError500,
-  chats: PageChats,
-  login: PageLogin,
-  password: PagePassword,
-  profile: PageProfile,
-  signup: PageSignup,
-};
+const router = new Router(APP_SELECTOR);
 
-const renderPage = (): void => {
-  const pathname = window.location.pathname.replace(/^\/|\/$/g, '');
-  const Page = pages[pathname] || pages['404'];
-
-  renderDOM(APP_SELECTOR, new Page());
-};
-
-document.addEventListener('DOMContentLoaded', renderPage);
+router
+  .use(['/', '/messenger'], PageChats)
+  .use('/login', PageLogin)
+  .use('/sign-up', PageSignUp)
+  .use('/settings', PageSettings)
+  .use('/password', PagePassword)
+  .use('/500', PageError500)
+  .use('*', PageError404)
+  .start();

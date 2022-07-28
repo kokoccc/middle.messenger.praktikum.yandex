@@ -10,7 +10,7 @@ import template from './template.hbs';
 
 const getElements = () => ({
   linkBack: new LinkBack({
-    path: '/profile',
+    path: '/settings',
   }),
   inputOldPassword: new TextField({
     label: 'Текущий пароль',
