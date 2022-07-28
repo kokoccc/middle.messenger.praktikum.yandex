@@ -14,7 +14,7 @@ const getElements = () => ({
     class: 'mx-auto mt-10',
   }),
   linkBack: new LinkBack({
-    path: '/',
+    path: '/messenger',
   }),
   inputLogin: new TextField({
     label: 'Логин',

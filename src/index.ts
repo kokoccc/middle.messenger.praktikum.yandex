@@ -16,9 +16,9 @@ const APP_SELECTOR = '#app';
 const router = new Router(APP_SELECTOR);
 
 router
-  .use(['/', '/messenger'], PageChats)
-  .use('/login', PageLogin)
+  .use(['/', '/login'], PageLogin)
   .use('/sign-up', PageSignUp)
+  .use('/messenger', PageChats)
   .use('/settings', PageSettings)
   .use('/password', PagePassword)
   .use('/500', PageError500)
