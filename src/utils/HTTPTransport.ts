@@ -11,7 +11,7 @@ type Data = Record<string, number | string | Obj | Arr>
 
 interface Options {
   data?: Data
-  headers?: Record<string, unknown>
+  headers?: Record<string, string>
   method: string,
   timeout?: number
 }
@@ -27,37 +27,54 @@ function queryStringify(data: Data) {
 }
 
 export class HTTPTransport {
-  get(url: string, options: Options) {
-    const { data } = options;
-    let requestURL: string = url;
+  private _baseURL;
 
-    if (data) {
-      requestURL = url + queryStringify(data);
-    }
-
-    return this._request(requestURL, { ...options, method: METHODS.GET }, options.timeout);
+  constructor(baseURL: string) {
+    this._baseURL = baseURL;
   }
 
-  post(url: string, options: Options) {
-    return this._request(url, { ...options, method: METHODS.POST }, options.timeout);
+  get(url: string, options = {}) {
+    return this._request(url, { ...options, method: METHODS.GET });
   }
 
-  put(url: string, options: Options) {
-    return this._request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  post(url: string, options = {}) {
+    return this._request(url, { ...options, method: METHODS.POST });
   }
 
-  delete(url: string, options: Options) {
-    return this._request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  put(url: string, options = {}) {
+    return this._request(url, { ...options, method: METHODS.PUT });
   }
 
-  protected _request = (url: string, options: Options, timeout = 5000) => {
-    const { method, data } = options;
+  delete(url: string, options = {}) {
+    return this._request(url, { ...options, method: METHODS.DELETE });
+  }
+
+  protected _request = (url: string, options: Options) => {
+    const {
+      data,
+      headers = {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      method = METHODS.GET,
+      timeout = 5000,
+    } = options;
+
+    const params = method === METHODS.GET && data ? queryStringify(data) : '';
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
 
-      xhr.onload = () => resolve(xhr);
+      xhr.open(method, this._baseURL + url + params);
+
+      xhr.onload = () => {
+        const { response } = xhr;
+
+        if (xhr.status === 200) {
+          resolve(response);
+        } else {
+          reject(response);
+        }
+      };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
@@ -65,8 +82,16 @@ export class HTTPTransport {
 
       xhr.timeout = timeout;
 
+      Object.entries(headers).forEach(([key, value]) => {
+        xhr.setRequestHeader(key, value);
+      });
+
+      xhr.withCredentials = true;
+
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

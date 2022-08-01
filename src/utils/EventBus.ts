@@ -23,7 +23,7 @@ export class EventBus {
 
   emit(event: string, ...args: Props[]): void {
     if (!this.listeners[event]) {
-      throw new Error(`Event does not exist: ${event}`);
+      return;
     }
 
     this.listeners[event].forEach((listener) => {

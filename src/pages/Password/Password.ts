@@ -1,4 +1,5 @@
-import { Block, globalValidationRules } from 'utils';
+import { Block, globalValidationRules, submitForm } from 'utils';
+import { usersController } from 'controllers';
 import {
   Button,
   LinkBack,
@@ -8,7 +9,7 @@ import {
 import template from './Password.hbs';
 import './Password.pcss';
 
-const getElements = () => ({
+const elements = {
   linkBack: new LinkBack({
     path: '/settings',
   }),
@@ -17,6 +18,9 @@ const getElements = () => ({
     name: 'oldPassword',
     placeholder: '••••••••',
     type: 'password',
+    validation: {
+      rules: globalValidationRules.password,
+    },
   }),
   inputNewPassword: new TextField({
     label: 'Новый пароль',
@@ -32,16 +36,33 @@ const getElements = () => ({
     name: 'newPasswordConfirm',
     placeholder: '••••••••',
     type: 'password',
+    validation: {
+      matchingFieldName: 'newPassword',
+    },
   }),
   button: new Button({
     text: 'Сохранить',
     class: 'mt-1 align-self-center',
   }),
-});
+};
 
 export class PagePassword extends Block {
   constructor() {
-    super({ ...getElements(), formSelector: '.form--password' });
+    super({
+      ...elements,
+      form: {
+        selector: '.form--password',
+        fields: [
+          elements.inputOldPassword,
+          elements.inputNewPassword,
+          elements.inputNewPasswordConfirm,
+        ],
+        button: elements.button,
+        submit: (formEl: HTMLFormElement) => {
+          submitForm(formEl, usersController.changePassword, elements.button);
+        },
+      },
+    });
   }
 
   render() {

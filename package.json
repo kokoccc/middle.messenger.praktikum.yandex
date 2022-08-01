@@ -56,8 +56,11 @@
     "typescript": "4.7.4"
   },
   "alias": {
+    "api": "~/src/api",
     "components": "~/src/components",
+    "controllers": "~/src/controllers",
     "helpers": "~/src/helpers",
+    "interfaces": "~/src/interfaces",
     "images": "~/src/images",
     "layouts": "~/src/layouts",
     "pages": "~/src/pages",

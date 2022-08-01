@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 import {
   EventBus,
-  validateOnBlur,
-  validateOnFocus,
-  validateOnSubmit,
+  validateField,
+  validateForm,
+  validateValueMatching,
 } from 'utils';
 
 type Listener = (arg0: Event) => unknown;
@@ -11,7 +11,7 @@ type Listeners = Record<string, Listener>
 
 interface ListenerProps {
   events?: Listeners
-  formSelector?: string
+  form?: Form
   validation?: ValidationProps
 }
 
@@ -123,7 +123,7 @@ export class Block {
 
   private _toggleEventListeners(add: boolean) {
     const {
-      formSelector,
+      form,
       events = {},
       validation,
     }: ListenerProps = this.props;
@@ -134,31 +134,41 @@ export class Block {
       this._element[method](eventName, events[eventName]);
     });
 
-    if (formSelector) {
-      if (add) {
-        this.listeners.validateOnSubmit = (event: Event) => validateOnSubmit(event);
-      }
-
-      const formEl = this._element.matches(formSelector)
+    if (form) {
+      const formEl = (this._element.matches(form.selector)
         ? this._element
-        : this._element.querySelector(formSelector);
+        : this._element.querySelector(form.selector)) as HTMLFormElement;
 
-      if (formEl) {
-        formEl[method]('submit', this.listeners.validateOnSubmit);
+      if (!formEl) {
+        return;
       }
+
+      if (add) {
+        this.listeners.onSubmit = (event: Event) => {
+          event.preventDefault();
+
+          const isValid = this.validate();
+
+          if (isValid) {
+            form.submit(formEl);
+          }
+        };
+      }
+
+      formEl[method]('submit', this.listeners.onSubmit);
     }
 
     if (validation) {
       if (add) {
-        this.listeners.validateOnBlur = (event: Event) => validateOnBlur(event, validation);
-        this.listeners.validateOnFocus = (event: Event) => validateOnFocus(event, validation);
+        this.listeners.onBlur = () => this.validate();
+        this.listeners.onFocus = () => this.validate();
       }
 
       const inputElements = this._element.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
 
       inputElements.forEach((inputEl) => {
-        inputEl[method]('blur', this.listeners.validateOnBlur);
-        inputEl[method]('focus', this.listeners.validateOnFocus);
+        inputEl[method]('blur', this.listeners.onBlur);
+        inputEl[method]('focus', this.listeners.onFocus);
       });
     }
   }
@@ -217,5 +227,21 @@ export class Block {
 
   hide() {
     this.getContent().classList.add('d-none');
+  }
+
+  validate(): boolean {
+    if (this.props.form) {
+      return validateForm(this.props.form as Form);
+    }
+
+    if (this.props.validation) {
+      const { matchingFieldName } = this.props.validation as Record<string, string>;
+
+      return matchingFieldName
+        ? validateValueMatching(this._element as HTMLInputElement, matchingFieldName)
+        : validateField(this._element, this.props.validation as ValidationProps);
+    }
+
+    return true;
   }
 }

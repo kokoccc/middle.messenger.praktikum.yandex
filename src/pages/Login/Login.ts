@@ -1,10 +1,11 @@
-import { Block, globalValidationRules } from 'utils';
+import { Block, globalValidationRules, submitForm } from 'utils';
+import { authController } from 'controllers';
 import { Button, Tabs, TextField } from 'components';
 
 import template from './Login.hbs';
 import './Login.pcss';
 
-const getElements = () => ({
+const elements = {
   tabs: new Tabs({
     isLogin: true,
   }),
@@ -27,14 +28,26 @@ const getElements = () => ({
     },
   }),
   button: new Button({
-    text: 'Войти',
     class: 'mt-1 align-self-center',
+    text: 'Войти',
   }),
-});
+};
 
 export class PageLogin extends Block {
   constructor() {
-    super({ ...getElements(), formSelector: '.form--login' });
+    super({
+      ...elements,
+      form: {
+        selector: '.form--login',
+        fields: [
+          elements.inputLogin,
+          elements.inputPassword,
+        ],
+        submit: (formEl: HTMLFormElement) => {
+          submitForm(formEl, authController.signIn, elements.button);
+        },
+      },
+    });
   }
 
   render() {

@@ -7,16 +7,23 @@ export class Route {
   private _block: Block | null;
   private _props: Props;
 
-  constructor(pathname: string, view: typeof Block, props: Props) {
+  onlyForAuthorized: boolean;
+
+  constructor(pathname: string, view: typeof Block, props: Props, onlyForAuthorized: boolean) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this.onlyForAuthorized = onlyForAuthorized;
+  }
+
+  get forAuthorized() {
+    return this.onlyForAuthorized;
   }
 
   leave() {
     if (this._block) {
-      this._block.hide();
+      this._block.getContent().remove();
     }
   }
 
@@ -31,15 +38,11 @@ export class Route {
     }
   }
 
-  render() {
-    if (this._block) {
-      this._block.show();
-      return;
-    }
-
+  render(replaceContent = false) {
     const query = this._props.rootQuery as string;
 
     this._block = new this._blockClass();
-    renderDOM(query, this._block);
+
+    renderDOM(query, this._block, replaceContent);
   }
 }

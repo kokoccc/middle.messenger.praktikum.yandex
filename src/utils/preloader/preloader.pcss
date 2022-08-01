@@ -1,0 +1,21 @@
+@import "../../styles/helpers/colors.pcss";
+
+.preloader::after {
+  content: "";
+  width: 100px;
+  aspect-ratio: 1;
+  border: 5px solid map-get($colors, blue-lightest);
+  border-top-color: map-get($colors, blue);
+  border-radius: 50%;
+  transform: rotate(0deg);
+  animation: preloader 1s infinite ease-in-out;
+}
+
+@keyframes preloader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

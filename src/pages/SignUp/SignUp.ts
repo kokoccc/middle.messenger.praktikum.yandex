@@ -1,10 +1,11 @@
-import { Block, globalValidationRules } from 'utils';
+import { Block, globalValidationRules, submitForm } from 'utils';
+import { authController } from 'controllers';
 import { Button, Tabs, TextField } from 'components';
 
 import template from './SignUp.hbs';
 import './SignUp.pcss';
 
-const getElements = () => ({
+const elements = {
   tabs: new Tabs({
     isLogin: false,
   }),
@@ -77,14 +78,31 @@ const getElements = () => ({
     type: 'password',
   }),
   button: new Button({
-    text: 'Войти',
+    text: 'Зарегистрироваться',
     class: 'mt-1 align-self-center',
   }),
-});
+};
 
 export class PageSignUp extends Block {
   constructor() {
-    super({ ...getElements(), formSelector: '.form--sign-up' });
+    super({
+      ...elements,
+      form: {
+        selector: '.form--sign-up',
+        fields: [
+          elements.inputLogin,
+          elements.inputDisplayName,
+          elements.inputFirstName,
+          elements.inputSecondName,
+          elements.inputPhone,
+          elements.inputEmail,
+          elements.inputPassword,
+        ],
+        submit: (formEl: HTMLFormElement) => {
+          submitForm(formEl, authController.signUp, elements.button);
+        },
+      },
+    });
   }
 
   render() {

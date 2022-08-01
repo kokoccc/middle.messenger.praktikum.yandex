@@ -1,4 +1,5 @@
-import { Router } from 'utils';
+import { router, preloader } from 'utils';
+
 import {
   PageChats,
   PageError404,
@@ -11,16 +12,14 @@ import {
 
 import './styles/styles.pcss';
 
-const APP_SELECTOR = '#app';
-
-const router = new Router(APP_SELECTOR);
+preloader.show();
 
 router
   .use(['/', '/login'], PageLogin)
   .use('/sign-up', PageSignUp)
-  .use('/messenger', PageChats)
-  .use('/settings', PageSettings)
-  .use('/password', PagePassword)
+  .use('/messenger', PageChats, true)
+  .use('/settings', PageSettings, true)
+  .use('/password', PagePassword, true)
   .use('/500', PageError500)
   .use('*', PageError404)
   .start();

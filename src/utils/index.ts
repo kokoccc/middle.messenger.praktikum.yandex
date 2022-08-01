@@ -1,13 +1,15 @@
 export { EventBus } from './EventBus';
 export { Block } from './Block';
-export { Route } from './Route';
-export { Router } from './Router';
-export { renderDOM } from './renderDOM';
 export { HTTPTransport } from './HTTPTransport';
+export { Route } from './Route';
+export { router } from './router';
+export { renderDOM } from './renderDOM';
+export { store, StoreEvents } from './store';
 
 export { rules as globalValidationRules } from './validation/rules';
-export {
-  validateOnBlur,
-  validateOnFocus,
-  validateOnSubmit,
-} from './validation/methods';
+export { validateField, validateForm, validateValueMatching } from './validation/methods';
+
+export { submitForm } from './submitForm';
+
+export { preloader } from './preloader/preloader';
+export { snackbar } from './snackbar/snackbar';

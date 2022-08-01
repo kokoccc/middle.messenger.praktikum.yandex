@@ -1,13 +1,15 @@
+import { isEqual } from 'helpers';
+
 interface FieldToggler {
   inputEl: HTMLInputElement
-  parentClassName: string
+  parentClassName?: string
   errorMessages: string[]
   isValid: boolean
 }
 
 const toggleField = ({
   inputEl,
-  parentClassName,
+  parentClassName = 'ui-text-field',
   errorMessages,
   isValid,
 }: FieldToggler) => {
@@ -22,11 +24,11 @@ const toggleField = ({
   }
 };
 
-const validateInput = (event: Event, {
+const validateField = (el: HTMLElement, {
   rules,
   parentClassName = 'ui-text-field',
-}: ValidationProps) => {
-  const inputEl = event.target as HTMLInputElement;
+}: ValidationProps): boolean => {
+  const inputEl = (el.matches('input') ? el : el.querySelector('input')) as HTMLInputElement;
   const { value }: { value: string } = inputEl;
 
   const errorMessages = rules.reduce((arr: string[], { regex, negative, message }) => {
@@ -44,24 +46,41 @@ const validateInput = (event: Event, {
     errorMessages,
     isValid,
   });
+
+  return isValid;
 };
 
-const validateForm = (event: Event) => {
-  event.preventDefault();
+const validateForm = (form: Form): boolean => {
+  let isFormValid = true;
 
-  const formEl = event.target as HTMLFormElement;
-  const formData = Object.fromEntries(new FormData(formEl));
+  form.fields.forEach((field) => {
+    const isFieldValid = field.validate();
 
-  const inputs = formEl.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
-
-  inputs.forEach((inputEl) => {
-    inputEl.dispatchEvent(new Event('blur'));
+    if (!isFieldValid) {
+      isFormValid = false;
+    }
   });
 
-  // eslint-disable-next-line no-console
-  console.log(formData);
+  return isFormValid;
 };
 
-export const validateOnBlur = validateInput;
-export const validateOnFocus = validateInput;
-export const validateOnSubmit = validateForm;
+const validateValueMatching = (el: HTMLInputElement, fieldName: string) => {
+  const inputEl = (el.matches('input') ? el : el.querySelector('input')) as HTMLInputElement;
+  const { value } = inputEl;
+
+  const formEl = el.closest('form');
+  const originalInputEl = formEl?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
+  const originalValue = originalInputEl?.value;
+
+  const isValid = isEqual(value, originalValue);
+
+  toggleField({
+    inputEl,
+    errorMessages: ['Пароли не соответствуют друг другу'],
+    isValid,
+  });
+
+  return isValid;
+};
+
+export { validateField, validateForm, validateValueMatching };

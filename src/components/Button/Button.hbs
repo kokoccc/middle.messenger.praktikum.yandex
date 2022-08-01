@@ -1,6 +1,14 @@
 <button
-  class="ui-btn px-4 py-2 text-body-medium {{ class }}"
+  class="
+    ui-btn px-4 py-2 text-body-medium
+    {{ class }}
+    {{#if secondary}} ui-btn--secondary {{/if}}
+    {{#if danger}} ui-btn--danger {{/if}}
+    {{#if outlined}} ui-btn--outlined {{/if}}
+    {{#if loading}} ui-btn--loading {{/if}}
+  "
   {{#if type}} type="{{type}}" {{/if}}
+  {{#if loading}} disabled {{/if}}
 >
   {{ text }}
 </button>

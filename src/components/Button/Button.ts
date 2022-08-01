@@ -5,10 +5,14 @@ import template from './Button.hbs';
 import './Button.pcss';
 
 interface Props {
+  class?: string
+  danger?: boolean
+  events?: Record<string, (event: unknown) => void>
+  loading?: boolean
+  outlined?: boolean
+  secondary?: boolean
   text: string
   type?: string
-  class?: string
-  events?: Record<string, (event: unknown) => void>
 }
 
 export class Button extends Block {
