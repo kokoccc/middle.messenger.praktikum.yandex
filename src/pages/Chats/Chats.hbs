@@ -8,9 +8,9 @@
     </header>
 
     <nav class="chats">
-      {{{ chatItem1 }}}
-      {{{ chatItem2 }}}
-      {{{ chatItem3 }}}
+      {{#each chats}}
+        {{{this}}}
+      {{/each}}
     </nav>
   </aside>
 

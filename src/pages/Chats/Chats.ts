@@ -15,11 +15,8 @@ import imagePepe from 'images/pepe.png';
 import template from './Chats.hbs';
 import './Chats.pcss';
 
-const getElements = () => ({
-  search: new Search({
-    class: 'flex-grow-1',
-  }),
-  chatItem1: new ChatItem({
+const chats = [
+  new ChatItem({
     date: '10:20',
     isGroup: true,
     name: 'Дмитрий',
@@ -27,7 +24,7 @@ const getElements = () => ({
     title: 'Настолки',
     unreadCount: 12,
   }),
-  chatItem2: new ChatItem({
+  new ChatItem({
     date: 'Пн',
     imagePath: imagePepe,
     isActive: true,
@@ -35,12 +32,19 @@ const getElements = () => ({
     name: 'Вы',
     title: 'Олег',
   }),
-  chatItem3: new ChatItem({
+  new ChatItem({
     date: '1 Фев 2022',
     message: 'Где макет? Сколько можно?',
     title: 'dodo',
     unreadCount: 1,
   }),
+];
+
+const elements = {
+  search: new Search({
+    class: 'flex-grow-1',
+  }),
+  chats,
   avatar: new Avatar({
     imagePath: imagePepe,
     size: 'smallest',
@@ -85,11 +89,11 @@ const getElements = () => ({
       rules: [{ regex: /./, message: 'Введите текст сообщения' }],
     },
   }),
-});
+};
 
 export class PageChats extends Block {
   constructor() {
-    super({ iconDots, iconMenu, ...getElements() });
+    super({ iconDots, iconMenu, ...elements });
   }
 
   render() {

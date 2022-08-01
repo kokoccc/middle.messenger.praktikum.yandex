@@ -52,6 +52,11 @@ export class Block {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
+      } else if (Array.isArray(value)) {
+        value.forEach((child, index) => {
+          children[`${key}_${index}`] = child;
+          props[key] = value.map(this._getStubHTML);
+        });
       } else {
         props[key] = value;
       }
@@ -173,6 +178,10 @@ export class Block {
     }
   }
 
+  private _getStubHTML(item: Block): string {
+    return `<div data-id="${item.id}"></div>`;
+  }
+
   init() {
     this.eventBus().emit(EVENTS.FLOW_RENDER);
   }
@@ -195,7 +204,7 @@ export class Block {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+      propsAndStubs[key] = this._getStubHTML(child);
     });
 
     const templateElement = document.createElement('template');

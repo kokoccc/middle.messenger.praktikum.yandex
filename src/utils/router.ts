@@ -9,8 +9,6 @@ import { authController } from 'controllers';
 const APP_SELECTOR = '#app';
 
 class Router {
-  private static __instance: Router;
-
   private _currentRoute: Route | null = null;
   private _rootQuery = '';
 
@@ -18,15 +16,8 @@ class Router {
   history: History = window.history;
 
   constructor(rootQuery: string) {
-    if (Router.__instance) {
-      // eslint-disable-next-line no-constructor-return
-      return Router.__instance;
-    }
-
     this._currentRoute = null;
     this._rootQuery = rootQuery;
-
-    Router.__instance = this;
   }
 
   private async _onRoute(pathname: string) {

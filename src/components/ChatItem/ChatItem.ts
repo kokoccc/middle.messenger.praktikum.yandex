@@ -8,6 +8,7 @@ import './ChatItem.pcss';
 
 interface Props {
   date: string
+  events?: Record<string, (event: unknown) => void>
   isActive?: boolean
   isGroup?: boolean
   title: string
