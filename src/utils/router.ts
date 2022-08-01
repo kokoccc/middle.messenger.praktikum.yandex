@@ -53,8 +53,8 @@ class Router {
     preloader.hide();
   }
 
-  private _addRoute(pathname: string, block: typeof Block, onlyForAauthorized: boolean) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery }, onlyForAauthorized);
+  private _addRoute(pathname: string, block: typeof Block, access: string) {
+    const route = new Route(pathname, block, { rootQuery: this._rootQuery }, access);
     this.routes.push(route);
   }
 
@@ -69,22 +69,22 @@ class Router {
       isAuthorized = await authController.checkAuth();
     }
 
-    if (!isAuthorized && route?.forAuthorized) {
+    if (!isAuthorized && route?.access === 'auth') {
       return '/login';
     }
 
-    if (isAuthorized && route?.forAuthorized === false) {
+    if (isAuthorized && route?.access === 'unauth') {
       return '/messenger';
     }
 
     return null;
   }
 
-  use(pathname: string | string[], block: typeof Block, onlyForAauthorized = false): Router {
+  use(pathname: string | string[], block: typeof Block, status = 'all'): Router {
     if (Array.isArray(pathname)) {
-      pathname.forEach((item) => this._addRoute(item, block, onlyForAauthorized));
+      pathname.forEach((item) => this._addRoute(item, block, status));
     } else {
-      this._addRoute(pathname, block, onlyForAauthorized);
+      this._addRoute(pathname, block, status);
     }
 
     return this;

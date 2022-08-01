@@ -47,8 +47,6 @@ class AuthController {
     http.post(PATHS.signIn, { data })
       .then(() => {
         snackbar.show('Вы успешно авторизовались');
-        // console.log(this.getUser);
-        // this.getUser();
         router.go('/messenger');
       })
       .catch(snackbar.showError)

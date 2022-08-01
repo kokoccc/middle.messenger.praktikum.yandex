@@ -6,19 +6,18 @@ export class Route {
   private _blockClass: typeof Block;
   private _block: Block | null;
   private _props: Props;
+  private _access: string;
 
-  onlyForAuthorized: boolean;
-
-  constructor(pathname: string, view: typeof Block, props: Props, onlyForAuthorized: boolean) {
+  constructor(pathname: string, view: typeof Block, props: Props, access: string) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
-    this.onlyForAuthorized = onlyForAuthorized;
+    this._access = access;
   }
 
-  get forAuthorized() {
-    return this.onlyForAuthorized;
+  get access() {
+    return this._access;
   }
 
   leave() {
