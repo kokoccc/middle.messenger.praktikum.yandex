@@ -15,7 +15,7 @@
     "typeRoots": [
       "node_modules/@types",
       "src/types/global.d.ts",
-      "src/types/formats.d.ts"
+      "src/types/modules.ts"
     ]
   },
   "exclude": [

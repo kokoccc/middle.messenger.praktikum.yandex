@@ -1,3 +1,5 @@
+import Handlebars from 'handlebars';
+import HandlebarsHelpers from 'just-handlebars-helpers';
 import { router, preloader } from 'utils';
 
 import {
@@ -11,6 +13,8 @@ import {
 } from 'pages';
 
 import './styles/styles.pcss';
+
+HandlebarsHelpers.registerHelpers(Handlebars);
 
 preloader.show();
 
