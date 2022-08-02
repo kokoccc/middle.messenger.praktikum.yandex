@@ -5,18 +5,10 @@
     {{{ avatar }}}
   </header>
 
-  <form class="form form--settings flex flex-column gap-row-5 mt-8">
-    {{{ inputLogin }}}
-    {{{ inputDisplayName }}}
-    {{{ inputFirstName }}}
-    {{{ inputSecondName }}}
-    {{{ inputPhone }}}
-    {{{ inputEmail }}}
-    {{{ button }}}
-  </form>
+  {{{ form }}}
 
   <section class="mt-6">
-    <a class="text-body-medium blue-dark" href="/password">Сменить пароль</a>
+    <a class="text-body-medium blue-dark" href="{{passwordChangePath}}">Сменить пароль</a>
     <hr class="settings__separator mt-3 bg-gray-lighter">
     {{{ buttonExit }}}
   </section>

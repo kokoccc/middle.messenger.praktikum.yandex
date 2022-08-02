@@ -6,9 +6,9 @@ import template from './Dialog.hbs';
 import './Dialog.pcss';
 
 interface Props {
-  cancelButton: Block
-  confirmButton: Block
-  content: Block
+  cancelButton: TBlock
+  confirmButton: TBlock
+  content: TBlock
   title: string
 }
 

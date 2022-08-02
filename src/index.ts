@@ -1,5 +1,4 @@
-import Handlebars from 'handlebars';
-import HandlebarsHelpers from 'just-handlebars-helpers';
+import { ROUTES } from 'constants';
 import { router, preloader } from 'utils';
 
 import {
@@ -14,16 +13,14 @@ import {
 
 import './styles/styles.pcss';
 
-HandlebarsHelpers.registerHelpers(Handlebars);
-
 preloader.show();
 
 router
-  .use(['/', '/login'], PageLogin/* , 'unauth' */)
-  .use('/sign-up', PageSignUp, 'unauth')
-  .use('/messenger', PageChats, 'auth')
-  .use('/settings', PageSettings, 'auth')
-  .use('/password', PagePassword, 'auth')
-  .use('/500', PageError500)
+  .use(ROUTES.login, PageLogin, 'unauth')
+  .use(ROUTES.signUp, PageSignUp, 'unauth')
+  .use(ROUTES.chats, PageChats, 'auth')
+  .use(ROUTES.settings, PageSettings, 'auth')
+  .use(ROUTES.password, PagePassword, 'auth')
+  .use(ROUTES.error500, PageError500)
   .use('*', PageError404)
   .start();

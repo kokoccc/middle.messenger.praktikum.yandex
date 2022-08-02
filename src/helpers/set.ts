@@ -1,10 +1,10 @@
 import { isPlainObject } from 'helpers';
 
-type Indexed<T = unknown> = {
-  [key in string]: T;
-};
-
-export const set = (object: Indexed | unknown, path: string, value: unknown): Indexed | unknown => {
+export const set = (
+  object: TIndexed | unknown,
+  path: string,
+  value: unknown,
+): TIndexed | unknown => {
   if (typeof path !== 'string') {
     throw new Error('path must be string');
   }
@@ -14,7 +14,7 @@ export const set = (object: Indexed | unknown, path: string, value: unknown): In
   }
 
   const keys = path.split('.');
-  let currentObj = object as Indexed;
+  let currentObj = object as TIndexed;
 
   keys.forEach((key, i) => {
     if (i === keys.length - 1) {

@@ -1,4 +1,7 @@
 import { HTTPTransport, snackbar } from 'utils';
+import {
+  IChangeAvatar, IChangePassword, IChangeProfile,
+} from 'interfaces';
 
 const http = new HTTPTransport('https://ya-praktikum.tech/api/v2');
 
@@ -9,7 +12,7 @@ const enum PATHS {
 }
 
 class UsersController {
-  changeAvatar({ file, component }: ControllerMethodParams) {
+  async changeAvatar({ file, component }: IChangeAvatar) {
     snackbar.show('Загружаем аватар…');
 
     const formData = new FormData();
@@ -24,34 +27,32 @@ class UsersController {
 
         const responseObj = JSON.parse(response as string);
 
-        component?.setProps({
+        component.setProps({
           imagePath: `https://ya-praktikum.tech/api/v2/resources${responseObj.avatar}`,
         });
       })
       .catch(snackbar.showError);
   }
 
-  changePassword({ data, button, formEl }: ControllerMethodParams) {
-    button?.setProps({ loading: true });
+  async changePassword({ data, button, fields }: IChangePassword) {
+    button.setLoading();
 
-    http.put(PATHS.password, { data })
+    return http.put(PATHS.password, { data })
       .then(() => {
         snackbar.show('Пароль изменен');
-
-        const passwordInputs = formEl?.querySelectorAll('input[name*="password" i]');
-        passwordInputs?.forEach((inputEl) => { (inputEl as HTMLInputElement).value = ''; });
+        fields.forEach((field) => field.reset());
       })
       .catch(snackbar.showError)
-      .finally(() => button?.setProps({ loading: false }));
+      .finally(button.unsetLoading);
   }
 
-  changeProfile({ data, button }: ControllerMethodParams) {
-    button?.setProps({ loading: true });
+  async changeProfile({ data, button }: IChangeProfile) {
+    button.setLoading();
 
-    http.put(PATHS.profile, { data })
+    return http.put(PATHS.profile, { data })
       .then(() => snackbar.show('Профиль изменен'))
       .catch(snackbar.showError)
-      .finally(() => button?.setProps({ loading: false }));
+      .finally(button.unsetLoading);
   }
 }
 

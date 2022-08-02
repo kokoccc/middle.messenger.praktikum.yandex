@@ -1,67 +1,61 @@
-import { Block, globalValidationRules, submitForm } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import { usersController } from 'controllers';
 import {
-  Button,
-  LinkBack,
-  TextField,
+  Button, Form, LinkBack, TextField,
 } from 'components';
 
 import template from './Password.hbs';
 import './Password.pcss';
 
-const elements = {
-  linkBack: new LinkBack({
-    path: '/settings',
-  }),
-  inputOldPassword: new TextField({
-    label: 'Текущий пароль',
-    name: 'oldPassword',
-    placeholder: '••••••••',
-    type: 'password',
-    validation: {
-      rules: globalValidationRules.password,
-    },
-  }),
-  inputNewPassword: new TextField({
-    label: 'Новый пароль',
-    name: 'newPassword',
-    placeholder: '••••••••',
-    type: 'password',
-    validation: {
-      rules: globalValidationRules.password,
-    },
-  }),
-  inputNewPasswordConfirm: new TextField({
-    label: 'Новый пароль (еще раз)',
-    name: 'newPasswordConfirm',
-    placeholder: '••••••••',
-    type: 'password',
-    validation: {
-      matchingFieldName: 'newPassword',
-    },
-  }),
-  button: new Button({
-    text: 'Сохранить',
-    class: 'mt-1 align-self-center',
-  }),
-};
-
 export class PagePassword extends Block {
-  constructor() {
+  constructor(props: IProps) {
     super({
-      ...elements,
-      form: {
-        selector: '.form--password',
+      linkBack: new LinkBack({
+        path: '/settings',
+      }),
+      form: new Form({
         fields: [
-          elements.inputOldPassword,
-          elements.inputNewPassword,
-          elements.inputNewPasswordConfirm,
+          new TextField({
+            label: 'Текущий пароль',
+            name: 'oldPassword',
+            placeholder: '••••••••',
+            type: 'password',
+            validations: globalValidationRules.password,
+          }),
+          new TextField({
+            label: 'Новый пароль',
+            name: 'newPassword',
+            placeholder: '••••••••',
+            type: 'password',
+            validations: globalValidationRules.password,
+          }),
+          new TextField({
+            label: 'Новый пароль (еще раз)',
+            name: 'newPasswordConfirm',
+            placeholder: '••••••••',
+            type: 'password',
+            validations: [
+              ...globalValidationRules.password,
+              {
+                compareFieldName: 'newPassword',
+                message: 'Пароли не соответствуют друг другу',
+              },
+            ],
+          }),
         ],
-        button: elements.button,
-        submit: (formEl: HTMLFormElement) => {
-          submitForm(formEl, usersController.changePassword, elements.button);
+        button: new Button({
+          text: 'Сохранить',
+          class: 'mt-1 align-self-center',
+        }),
+        submit(formData: TSubmitData) {
+          usersController.changePassword({
+            data: formData,
+            button: this.button,
+            fields: this.fields,
+          });
         },
-      },
+      }),
+      ...props,
     });
   }
 

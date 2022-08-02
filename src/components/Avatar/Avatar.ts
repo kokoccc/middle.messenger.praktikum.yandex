@@ -10,7 +10,7 @@ interface Props {
   class?: string
   events?: Record<string, (event: Event) => void>
   imagePath?: string
-  input?: Block
+  input?: TBlock
   onImageUpload?: (event: Event) => void
   size?: string
 }

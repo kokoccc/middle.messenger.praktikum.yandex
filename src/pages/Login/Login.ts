@@ -1,4 +1,4 @@
-import { Block, globalValidationRules, submitForm } from 'utils';
+import { Block, globalValidationRules } from 'utils';
 import { authController } from 'controllers';
 import {
   Button, Form, Tabs, TextField,
@@ -8,11 +8,9 @@ import template from './Login.hbs';
 import './Login.pcss';
 
 export class PageLogin extends Block {
-  constructor(props: TProps) {
+  constructor(props: IProps) {
     super({
-      tabs: new Tabs({
-        isLogin: true,
-      }),
+      tabs: new Tabs(),
       form: new Form({
         fields: [
           new TextField({
@@ -20,29 +18,25 @@ export class PageLogin extends Block {
             name: 'login',
             placeholder: 'vasyapupkin',
             type: 'text',
-            validation: {
-              rules: globalValidationRules.login,
-            },
+            validations: globalValidationRules.login,
           }),
           new TextField({
             label: 'Пароль',
             name: 'password',
             placeholder: '••••••••',
             type: 'password',
-            validation: {
-              rules: globalValidationRules.password,
-            },
+            validations: globalValidationRules.password,
           }),
         ],
         button: new Button({
           class: 'mt-1 align-self-center',
           text: 'Войти',
         }),
-        events: {
-          submit: (event) => {
-            event.preventDefault();
-            console.log('submit');
-          },
+        submit(formData: TSubmitData) {
+          authController.signIn({
+            data: formData,
+            button: this.button,
+          });
         },
       }),
       ...props,

@@ -1,19 +1,12 @@
 import {
-  Block,
-  globalValidationRules,
-  submitForm,
-  store,
-  StoreEvents,
+  Block, globalValidationRules, store, StoreEvents,
 } from 'utils';
 import { authController, usersController } from 'controllers';
 import {
-  Avatar,
-  Button,
-  Dialog,
-  LinkBack,
-  TextField,
+  Avatar, Button, Dialog, Form, LinkBack, TextField,
 } from 'components';
 import { IUserData } from 'interfaces';
+import { ROUTES } from 'constants';
 import { LogoutDialog } from './components/LogoutDialog/LogoutDialog';
 
 import template from './Settings.hbs';
@@ -58,68 +51,57 @@ const avatar = new Avatar({
   },
 });
 
-const elements = {
-  avatar,
-  linkBack: new LinkBack({
-    path: '/messenger',
-  }),
-  inputLogin: new TextField({
+const fields = {
+  login: new TextField({
     label: 'Логин',
     name: 'login',
     placeholder: 'vasyapupkin',
     type: 'text',
-    validation: {
-      rules: globalValidationRules.login,
-    },
+    validations: globalValidationRules.login,
   }),
-  inputDisplayName: new TextField({
+  displayName: new TextField({
     label: 'Имя в чате',
     name: 'display_name',
     placeholder: 'Vasya',
     type: 'text',
   }),
-  inputFirstName: new TextField({
+  firstName: new TextField({
     label: 'Имя',
     name: 'first_name',
     placeholder: 'Василий',
     type: 'text',
-    validation: {
-      rules: globalValidationRules.name,
-    },
+    validations: globalValidationRules.name,
   }),
-  inputSecondName: new TextField({
+  secondName: new TextField({
     label: 'Фамилия',
     name: 'second_name',
     placeholder: 'Пупкин',
     type: 'text',
-    validation: {
-      rules: globalValidationRules.name,
-    },
+    validations: globalValidationRules.name,
   }),
-  inputPhone: new TextField({
+  phone: new TextField({
     inputmode: 'tel',
     label: 'Телефон',
     name: 'phone',
     placeholder: '+79031112233',
     type: 'tel',
-    validation: {
-      rules: globalValidationRules.phone,
-    },
+    validations: globalValidationRules.phone,
   }),
-  inputEmail: new TextField({
+  email: new TextField({
     inputmode: 'email',
     label: 'E-mail',
     name: 'email',
     placeholder: 'vasya@mail.ru',
     type: 'email',
-    validation: {
-      rules: globalValidationRules.email,
-    },
+    validations: globalValidationRules.email,
   }),
-  button: new Button({
-    text: 'Сохранить',
-    class: 'mt-1 align-self-center',
+};
+
+const elements = {
+  linkBack: new LinkBack({
+    path: '/messenger',
   }),
+  avatar,
   buttonExit: new Button({
     class: 'mt-3 text-body-medium',
     danger: true,
@@ -133,41 +115,53 @@ const elements = {
 };
 
 export class PageSettings extends Block {
-  constructor() {
+  constructor(props: IProps) {
     super({
       ...elements,
-      form: {
-        selector: '.form--settings',
+      form: new Form({
         fields: [
-          elements.inputLogin,
-          elements.inputDisplayName,
-          elements.inputFirstName,
-          elements.inputSecondName,
-          elements.inputPhone,
-          elements.inputEmail,
+          fields.login,
+          fields.displayName,
+          fields.firstName,
+          fields.secondName,
+          fields.phone,
+          fields.email,
         ],
-        submit: (formEl: HTMLFormElement) => {
-          submitForm(formEl, usersController.changeProfile, elements.button);
+        button: new Button({
+          text: 'Сохранить',
+          class: 'mt-1 align-self-center',
+        }),
+        submit(formData: TSubmitData) {
+          usersController.changeProfile({
+            data: formData,
+            button: this.button,
+          });
         },
-      },
+      }),
+      passwordChangePath: ROUTES.password,
+      ...props,
     });
 
-    store.on(StoreEvents.Updated, () => {
-      const state = store.getState();
-      const user = state.user as IUserData | null;
+    store.on(StoreEvents.Updated, this.updateProps);
+    this.updateProps();
+  }
 
-      if (user) {
-        elements.avatar.setProps({ imagePath: user.avatar });
-        elements.inputLogin.setProps({ value: user.login });
-        elements.inputDisplayName.setProps({ value: user.display_name });
-        elements.inputFirstName.setProps({ value: user.first_name });
-        elements.inputSecondName.setProps({ value: user.second_name });
-        elements.inputPhone.setProps({ value: user.phone });
-        elements.inputEmail.setProps({ value: user.email });
+  updateProps() {
+    const state = store.getState();
+    const user = state.user as IUserData | null;
+
+    if (user) {
+      if (user.avatar) {
+        this.children.avatar.setProps({ imagePath: user.avatar });
       }
-    });
 
-    authController.getUser();
+      fields.login.setProps({ value: user.login });
+      fields.displayName.setProps({ value: user.display_name });
+      fields.firstName.setProps({ value: user.first_name });
+      fields.secondName.setProps({ value: user.second_name });
+      fields.phone.setProps({ value: user.phone });
+      fields.email.setProps({ value: user.email });
+    }
   }
 
   render() {

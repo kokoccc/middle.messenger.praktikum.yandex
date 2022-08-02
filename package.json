@@ -60,6 +60,7 @@
     "api": "~/src/api",
     "components": "~/src/components",
     "controllers": "~/src/controllers",
+    "constants": "~/src/constants",
     "helpers": "~/src/helpers",
     "interfaces": "~/src/interfaces",
     "images": "~/src/images",

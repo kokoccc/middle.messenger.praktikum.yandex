@@ -1,18 +1,14 @@
+import Handlebars from 'handlebars';
+import HandlebarsHelpers from 'just-handlebars-helpers';
 import { nanoid } from 'nanoid';
-import {
-  EventBus,
-  validateField,
-  validateForm,
-  validateValueMatching,
-} from 'utils';
+import { EventBus } from 'utils';
 
+type TChildren = Record<string, TBlock>;
 type Listener = (arg0: Event) => unknown;
 type Listeners = Record<string, Listener>
 
 interface ListenerProps {
   events?: Listeners
-  form?: Form
-  validation?: ValidationProps
 }
 
 const enum EVENTS {
@@ -22,12 +18,14 @@ const enum EVENTS {
   FLOW_RENDER = 'flow:render',
 }
 
+HandlebarsHelpers.registerHelpers(Handlebars);
+
 export class Block {
   private _element: HTMLElement = document.createElement('div');
 
   id = '';
   props: Props = {};
-  children: Children = {};
+  children: TChildren = {};
   listeners: Listeners = {};
   isValueChanged = false;
   eventBus: () => EventBus;
@@ -38,7 +36,7 @@ export class Block {
 
     this.id = nanoid(10);
     this.props = this._makePropsProxy({ ...props, id: this.id });
-    this.children = children as Children;
+    this.children = children as TChildren;
     this.eventBus = () => eventBus;
 
     this._registerEvents();
@@ -50,9 +48,11 @@ export class Block {
     const props: Props = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
+      const isChildrenList = Array.isArray(value) && value.every((item) => item instanceof Block);
+
       if (value instanceof Block) {
         children[key] = value;
-      } else if (Array.isArray(value)) {
+      } else if (isChildrenList) {
         value.forEach((child, index) => {
           children[`${key}_${index}`] = child;
           props[key] = value.map(this._getStubHTML);
@@ -113,7 +113,7 @@ export class Block {
   private _componentDidMount() {
     this.componentDidMount();
 
-    Object.values(this.children).forEach((childBlock: Block) => {
+    Object.values(this.children).forEach((childBlock: TBlock) => {
       childBlock.dispatchComponentDidMount();
     });
   }
@@ -127,58 +127,16 @@ export class Block {
   }
 
   private _toggleEventListeners(add: boolean) {
-    const {
-      form,
-      events = {},
-      validation,
-    }: ListenerProps = this.props;
+    const { events = {} }: ListenerProps = this.props;
 
     const method = add ? 'addEventListener' : 'removeEventListener';
 
     Object.keys(events).forEach((eventName) => {
       this._element[method](eventName, events[eventName]);
     });
-
-    if (form) {
-      const formEl = (this._element.matches(form.selector)
-        ? this._element
-        : this._element.querySelector(form.selector)) as HTMLFormElement;
-
-      if (!formEl) {
-        return;
-      }
-
-      if (add) {
-        this.listeners.onSubmit = (event: Event) => {
-          event.preventDefault();
-
-          const isValid = this.validate();
-
-          if (isValid) {
-            form.submit(formEl);
-          }
-        };
-      }
-
-      formEl[method]('submit', this.listeners.onSubmit);
-    }
-
-    if (validation) {
-      if (add) {
-        this.listeners.onBlur = () => this.validate();
-        this.listeners.onFocus = () => this.validate();
-      }
-
-      const inputElements = this._element.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
-
-      inputElements.forEach((inputEl) => {
-        inputEl[method]('blur', this.listeners.onBlur);
-        inputEl[method]('focus', this.listeners.onFocus);
-      });
-    }
   }
 
-  private _getStubHTML(item: Block): string {
+  private _getStubHTML(item: TBlock): string {
     return `<div data-id="${item.id}"></div>`;
   }
 
@@ -212,6 +170,7 @@ export class Block {
 
     Object.values(this.children).forEach((child) => {
       const stub = templateElement.content.querySelector(`[data-id="${child.id}"]`) as HTMLElement;
+      child.setProps(props);
       stub.replaceWith(child.getContent());
     });
 
@@ -236,21 +195,5 @@ export class Block {
 
   hide() {
     this.getContent().classList.add('d-none');
-  }
-
-  validate(): boolean {
-    if (this.props.form) {
-      return validateForm(this.props.form as Form);
-    }
-
-    if (this.props.validation) {
-      const { matchingFieldName } = this.props.validation as Record<string, string>;
-
-      return matchingFieldName
-        ? validateValueMatching(this._element as HTMLInputElement, matchingFieldName)
-        : validateField(this._element, this.props.validation as ValidationProps);
-    }
-
-    return true;
   }
 }

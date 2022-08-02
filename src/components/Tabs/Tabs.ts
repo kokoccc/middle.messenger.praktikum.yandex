@@ -1,16 +1,19 @@
+import { ROUTES } from 'constants';
 import { Block } from 'utils';
 
 import template from './Tabs.hbs';
-
 import './Tabs.pcss';
 
-interface Props {
-  isLogin: boolean
-}
-
 export class Tabs extends Block {
-  constructor(props: Props) {
-    super({ ...props });
+  constructor(props: IProps = {}) {
+    super({
+      pages: [
+        { title: 'Вход', path: ROUTES.login },
+        { title: 'Регистрация', path: ROUTES.signUp },
+      ],
+      pathname: window.location.pathname,
+      ...props,
+    });
   }
 
   render() {

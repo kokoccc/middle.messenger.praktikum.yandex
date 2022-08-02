@@ -1,0 +1,8 @@
+<input
+  type="{{ type }}"
+  {{#if name}} name="{{name}}" {{/if}}
+  {{#if inputmode}} inputmode="{{inputmode}}" {{/if}}
+  {{#if placeholder}} placeholder="{{placeholder}}" {{/if}}
+  {{#if value}} value="{{value}}" {{/if}}
+  class="ui-text-field__input px-3 {{#if error}} ui-text-field__input--error {{/if}}"
+>

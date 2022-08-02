@@ -1,14 +1,14 @@
-import { Block, renderDOM } from 'utils';
+import { renderDOM } from 'utils';
 import { isEqual } from 'helpers';
 
 export class Route {
   private _pathname: string;
-  private _blockClass: typeof Block;
-  private _block: Block | null;
+  private _blockClass: TypeofBlock;
+  private _block: TBlock | null;
   private _props: Props;
   private _access: string;
 
-  constructor(pathname: string, view: typeof Block, props: Props, access: string) {
+  constructor(pathname: string, view: TypeofBlock, props: Props, access: string) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;

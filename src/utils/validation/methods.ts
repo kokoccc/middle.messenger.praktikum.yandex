@@ -1,86 +1,44 @@
 import { isEqual } from 'helpers';
 
-interface FieldToggler {
-  inputEl: HTMLInputElement
-  parentClassName?: string
-  errorMessages: string[]
+interface ITextFieldValidationResult {
   isValid: boolean
+  errorMessages: string[]
 }
 
-const toggleField = ({
-  inputEl,
-  parentClassName = 'ui-text-field',
-  errorMessages,
-  isValid,
-}: FieldToggler) => {
-  const parentEl = inputEl.closest(`.${parentClassName}`) as HTMLElement;
-  const errorEl = parentEl.querySelector(`.${parentClassName}__error`);
+const validateRegexMatching = (value: string, rule: IValidationRuleRegex) => {
+  const { regex, negative } = rule;
+  const isRegexTestPassed = regex.test(value);
 
-  if (parentEl && errorEl) {
-    parentEl.classList.toggle(`${parentClassName}--error`, !isValid);
-
-    errorEl.textContent = errorMessages.join('. ');
-    errorEl.classList.toggle('d-none', isValid);
-  }
+  return negative ? !isRegexTestPassed : isRegexTestPassed;
 };
 
-const validateField = (el: HTMLElement, {
-  rules,
-  parentClassName = 'ui-text-field',
-}: ValidationProps): boolean => {
-  const inputEl = (el.matches('input') ? el : el.querySelector('input')) as HTMLInputElement;
-  const { value }: { value: string } = inputEl;
+const validateValueMatching = (
+  inputEl: HTMLInputElement,
+  { compareFieldName }: { compareFieldName: string },
+) => {
+  const formEl = inputEl.closest('form') as HTMLFormElement;
+  const originalInputEl = formEl.querySelector(`input[name="${compareFieldName}"]`) as HTMLInputElement;
+  const originalValue = originalInputEl.value;
 
-  const errorMessages = rules.reduce((arr: string[], { regex, negative, message }) => {
-    const isRegexTestPassed = regex.test(value);
-    const isFailed = negative ? isRegexTestPassed : !isRegexTestPassed;
+  return isEqual(inputEl.value, originalValue);
+};
 
-    return isFailed ? arr.concat(message) : arr;
+const validateTextField = (
+  inputEl: HTMLInputElement,
+  rules: TValidationRules,
+): ITextFieldValidationResult => {
+  const errorMessages = rules.reduce((arr: string[], rule: IValidationRule) => {
+    const isValid = rule.regex
+      ? validateRegexMatching(inputEl.value, rule as IValidationRuleRegex)
+      : validateValueMatching(inputEl, rule as IValidationRuleCompare);
+
+    return isValid ? arr : arr.concat(rule.message);
   }, []);
 
-  const isValid = errorMessages.length === 0;
-
-  toggleField({
-    inputEl,
-    parentClassName,
+  return {
+    isValid: errorMessages.length === 0,
     errorMessages,
-    isValid,
-  });
-
-  return isValid;
+  };
 };
 
-const validateForm = (form: Form): boolean => {
-  let isFormValid = true;
-
-  form.fields.forEach((field) => {
-    const isFieldValid = field.validate();
-
-    if (!isFieldValid) {
-      isFormValid = false;
-    }
-  });
-
-  return isFormValid;
-};
-
-const validateValueMatching = (el: HTMLInputElement, fieldName: string) => {
-  const inputEl = (el.matches('input') ? el : el.querySelector('input')) as HTMLInputElement;
-  const { value } = inputEl;
-
-  const formEl = el.closest('form');
-  const originalInputEl = formEl?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
-  const originalValue = originalInputEl?.value;
-
-  const isValid = isEqual(value, originalValue);
-
-  toggleField({
-    inputEl,
-    errorMessages: ['Пароли не соответствуют друг другу'],
-    isValid,
-  });
-
-  return isValid;
-};
-
-export { validateField, validateForm, validateValueMatching };
+export { validateTextField };

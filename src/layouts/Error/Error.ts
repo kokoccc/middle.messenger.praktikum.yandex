@@ -1,11 +1,10 @@
 import { Block } from 'utils';
 
 import template from './Error.hbs';
-
 import './Error.pcss';
 
 export class LayoutError extends Block {
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super({ ...props });
   }
 

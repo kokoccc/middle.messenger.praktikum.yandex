@@ -1,10 +1,6 @@
-import {
-  Block,
-  preloader,
-  Route,
-  store,
-} from 'utils';
+import { preloader, Route, store } from 'utils';
 import { authController } from 'controllers';
+import { ROUTES } from 'constants';
 
 const APP_SELECTOR = '#app';
 
@@ -44,7 +40,7 @@ class Router {
     preloader.hide();
   }
 
-  private _addRoute(pathname: string, block: typeof Block, access: string) {
+  private _addRoute(pathname: string, block: TypeofBlock, access: string) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery }, access);
     this.routes.push(route);
   }
@@ -57,26 +53,22 @@ class Router {
     let isAuthorized = store.getState().user;
 
     if (isAuthorized === undefined) {
-      isAuthorized = await authController.checkAuth();
+      isAuthorized = await authController.getUser(false);
     }
 
     if (!isAuthorized && route?.access === 'auth') {
-      return '/login';
+      return ROUTES.login;
     }
 
     if (isAuthorized && route?.access === 'unauth') {
-      return '/messenger';
+      return ROUTES.chats;
     }
 
     return null;
   }
 
-  use(pathname: string | string[], block: typeof Block, status = 'all'): Router {
-    if (Array.isArray(pathname)) {
-      pathname.forEach((item) => this._addRoute(item, block, status));
-    } else {
-      this._addRoute(pathname, block, status);
-    }
+  use(pathname: string, block: TypeofBlock, status = 'all'): Router {
+    this._addRoute(pathname, block, status);
 
     return this;
   }

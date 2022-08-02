@@ -1,13 +1,11 @@
 import { Block } from 'utils';
 
 import template from './Button.hbs';
-
 import './Button.pcss';
 
-interface Props {
+interface Props extends IProps {
   class?: string
   danger?: boolean
-  events?: Record<string, (event: unknown) => void>
   loading?: boolean
   outlined?: boolean
   secondary?: boolean
@@ -23,4 +21,12 @@ export class Button extends Block {
   render() {
     return this.compile(template, this.props);
   }
+
+  setLoading = () => {
+    this.setProps({ loading: true });
+  };
+
+  unsetLoading = () => {
+    this.setProps({ loading: false });
+  };
 }

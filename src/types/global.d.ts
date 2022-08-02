@@ -1,42 +1,51 @@
-import { Block as BlockClass } from 'utils';
+import { Block } from 'utils';
+import { Button, TextField } from 'components';
 
 declare global {
-  export type Block = BlockClass;
-  export type Children = Record<string, Block>;
-  export type Listeners = Record<string, EventListenerOrEventListenerObject>;
-  export type Indexed<T = unknown> = { [key in string]: T; };
-  export type Props = Record<string, unknown>;
-  export type SubmitData = { [k: string]: FormDataEntryValue; };
+  // GENERAL
+  export type TBlock = Block;
+  export type TypeofBlock = typeof Block;
 
-  export type TBlock = BlockClass
+  // COMPONENTS
+  export type TButton = Button;
+  export type TTextField = TextField;
+
+  // TYPES
+  export type TIndexed<T = unknown> = { [key in string]: T; };
+
+  export type Props = Record<string, unknown>;
+  export type TSubmitData = { [k: string]: FormDataEntryValue; };
+
   export type TEventsProp = Record<string, (event: Event) => unknown>
-  export type TObj = Record<string, unknown>;
-  export type TProps = Record<string, unknown>;
+
+  export interface IProps extends TIndexed {
+    events?: TEventsProp
+  }
 
   export interface Form {
     selector: string
-    fields: Block[]
-    button: Block
+    fields: TBlock[]
+    button: TBlock
     submit: (formEl: HTMLFormElement) => void
   }
 
-  export interface ValidationRule {
+  // VALIDATION
+  export interface IValidationRuleRegex {
     regex: RegExp
     message: string
     negative?: boolean
   }
-  export interface ValidationProps {
-    parentClassName?: string
-    rules: ValidationRule[]
+  export interface IValidationRuleCompare {
+    compareFieldName: string,
+    message: string
   }
-
-  export interface ControllerMethodParams {
-    data?: SubmitData
-    button?: Block
-    file?: File
-    formEl?: HTMLFormElement
-    component?: Block
+  export interface IValidationRule {
+    regex?: RegExp
+    negative?: boolean
+    compareFieldName?: string,
+    message: string
   }
+  export type TValidationRules = IValidationRule[]
 }
 
 export {};

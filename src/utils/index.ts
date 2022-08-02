@@ -6,10 +6,8 @@ export { router } from './router';
 export { renderDOM } from './renderDOM';
 export { store, StoreEvents } from './store';
 
-export { rules as globalValidationRules } from './validation/rules';
-export { validateField, validateForm, validateValueMatching } from './validation/methods';
-
-export { submitForm } from './submitForm';
+export { globalValidationRules } from './validation/rules';
+export { validateTextField } from './validation/methods';
 
 export { preloader } from './preloader/preloader';
 export { snackbar } from './snackbar/snackbar';

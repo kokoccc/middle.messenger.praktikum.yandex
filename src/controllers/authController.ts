@@ -4,6 +4,8 @@ import {
   snackbar,
   store,
 } from 'utils';
+import { ISignIn, ISignUp, ILogout } from 'interfaces';
+import { ROUTES } from 'constants';
 
 const http = new HTTPTransport('https://ya-praktikum.tech/api/v2');
 
@@ -15,13 +17,7 @@ const enum PATHS {
 }
 
 class AuthController {
-  checkAuth() {
-    return http.get(PATHS.getUser)
-      .then(() => true)
-      .catch(() => false);
-  }
-
-  getUser() {
+  async getUser(showError = true) {
     return http.get(PATHS.getUser)
       .then((response) => {
         const userData = JSON.parse(response as string);
@@ -34,48 +30,51 @@ class AuthController {
         return true;
       })
       .catch((error) => {
-        snackbar.showError(error);
-        store.set('user', null);
+        if (showError) {
+          snackbar.showError(error);
+        }
 
+        store.set('user', null);
         return false;
       });
   }
 
-  signIn({ data, button }: ControllerMethodParams) {
-    button?.setProps({ loading: true });
+  async signIn({ data, button }: ISignIn) {
+    button.setLoading();
 
-    http.post(PATHS.signIn, { data })
-      .then(() => {
+    return http.post(PATHS.signIn, { data })
+      .then(async () => {
         snackbar.show('Вы успешно авторизовались');
-        router.go('/messenger');
+        await this.getUser();
+        router.go(ROUTES.chats);
       })
       .catch(snackbar.showError)
-      .finally(() => button?.setProps({ loading: false }));
+      .finally(button.unsetLoading);
   }
 
-  signUp({ data, button }: ControllerMethodParams) {
-    button?.setProps({ loading: true });
+  async signUp({ data, button }: ISignUp) {
+    button.setLoading();
 
-    http.post(PATHS.signUp, { data })
+    return http.post(PATHS.signUp, { data })
       .then(() => {
-        snackbar.show('Вы успешно зарегистрированы');
-        router.go('/messenger');
+        snackbar.show('Вы успешно зарегистрировались');
+        router.go(ROUTES.chats);
       })
       .catch(snackbar.showError)
-      .finally(() => button?.setProps({ loading: false }));
+      .finally(button.unsetLoading);
   }
 
-  logout({ button }: ControllerMethodParams) {
-    button?.setProps({ loading: true });
+  async logout({ button }: ILogout) {
+    button.setLoading();
 
-    http.post(PATHS.logout)
+    return http.post(PATHS.logout)
       .then(() => {
         snackbar.show('Вы вышли из системы');
         store.set('user', null);
-        router.go('/login');
+        router.go(ROUTES.login);
       })
       .catch(snackbar.showError)
-      .finally(() => button?.setProps({ loading: false }));
+      .finally(button.unsetLoading);
   }
 }
 

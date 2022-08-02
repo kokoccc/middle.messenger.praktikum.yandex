@@ -6,7 +6,7 @@ export enum StoreEvents {
 }
 
 class Store extends EventBus {
-  private _state: Indexed = {};
+  private _state: TIndexed = {};
 
   getState() {
     return this._state;

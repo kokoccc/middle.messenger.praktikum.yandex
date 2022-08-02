@@ -1,3 +1,17 @@
+export interface ISignIn {
+  data: TSubmitData
+  button: TButton
+}
+
+export interface ISignUp {
+  data: TSubmitData
+  button: TButton
+}
+
+export interface ILogout {
+  button: TButton
+}
+
 export interface IUserData {
   id: number
   first_name: string
