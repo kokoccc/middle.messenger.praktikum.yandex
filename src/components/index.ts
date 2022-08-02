@@ -3,6 +3,7 @@ export { Button } from './Button/Button';
 export { ButtonClose } from './ButtonClose/ButtonClose';
 export { ChatItem } from './ChatItem/ChatItem';
 export { Dialog } from './Dialog/Dialog';
+export { Form } from './Form/Form';
 export { LinkBack } from './LinkBack/LinkBack';
 export { Message } from './Message/Message';
 export { MessageForm } from './MessageForm/MessageForm';

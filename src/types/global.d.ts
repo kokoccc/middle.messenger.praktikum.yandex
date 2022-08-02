@@ -7,7 +7,11 @@ declare global {
   export type Indexed<T = unknown> = { [key in string]: T; };
   export type Props = Record<string, unknown>;
   export type SubmitData = { [k: string]: FormDataEntryValue; };
+
+  export type TBlock = BlockClass
+  export type TEventsProp = Record<string, (event: Event) => unknown>
   export type TObj = Record<string, unknown>;
+  export type TProps = Record<string, unknown>;
 
   export interface Form {
     selector: string

@@ -1,52 +1,51 @@
 import { Block, globalValidationRules, submitForm } from 'utils';
 import { authController } from 'controllers';
-import { Button, Tabs, TextField } from 'components';
+import {
+  Button, Form, Tabs, TextField,
+} from 'components';
 
 import template from './Login.hbs';
 import './Login.pcss';
 
-const elements = {
-  tabs: new Tabs({
-    isLogin: true,
-  }),
-  inputLogin: new TextField({
-    label: 'Логин',
-    name: 'login',
-    placeholder: 'vasyapupkin',
-    type: 'text',
-    validation: {
-      rules: globalValidationRules.login,
-    },
-  }),
-  inputPassword: new TextField({
-    label: 'Пароль',
-    name: 'password',
-    placeholder: '••••••••',
-    type: 'password',
-    validation: {
-      rules: globalValidationRules.password,
-    },
-  }),
-  button: new Button({
-    class: 'mt-1 align-self-center',
-    text: 'Войти',
-  }),
-};
-
 export class PageLogin extends Block {
-  constructor() {
+  constructor(props: TProps) {
     super({
-      ...elements,
-      form: {
-        selector: '.form--login',
+      tabs: new Tabs({
+        isLogin: true,
+      }),
+      form: new Form({
         fields: [
-          elements.inputLogin,
-          elements.inputPassword,
+          new TextField({
+            label: 'Логин',
+            name: 'login',
+            placeholder: 'vasyapupkin',
+            type: 'text',
+            validation: {
+              rules: globalValidationRules.login,
+            },
+          }),
+          new TextField({
+            label: 'Пароль',
+            name: 'password',
+            placeholder: '••••••••',
+            type: 'password',
+            validation: {
+              rules: globalValidationRules.password,
+            },
+          }),
         ],
-        submit: (formEl: HTMLFormElement) => {
-          submitForm(formEl, authController.signIn, elements.button);
+        button: new Button({
+          class: 'mt-1 align-self-center',
+          text: 'Войти',
+        }),
+        events: {
+          submit: (event) => {
+            event.preventDefault();
+            console.log('submit');
+          },
         },
-      },
+      }),
+      ...props,
     });
   }
 

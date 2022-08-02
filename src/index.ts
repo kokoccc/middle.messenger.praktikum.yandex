@@ -15,7 +15,7 @@ import './styles/styles.pcss';
 preloader.show();
 
 router
-  .use(['/', '/login'], PageLogin, 'unauth')
+  .use(['/', '/login'], PageLogin/* , 'unauth' */)
   .use('/sign-up', PageSignUp, 'unauth')
   .use('/messenger', PageChats, 'auth')
   .use('/settings', PageSettings, 'auth')
