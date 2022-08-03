@@ -102,7 +102,12 @@ export class Block {
     this._toggleEventListeners(false);
 
     const fragment = this.render();
-    const element = fragment.firstElementChild as HTMLElement;
+    let element = fragment.firstElementChild as HTMLElement;
+
+    if (fragment.children.length > 1) {
+      element = document.createElement('div');
+      element.appendChild(fragment);
+    }
 
     this._element.replaceWith(element);
     this._element = element;

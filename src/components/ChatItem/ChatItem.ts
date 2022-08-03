@@ -3,7 +3,6 @@ import { Avatar } from 'components';
 
 import iconGroup from 'images/group.svg';
 import template from './ChatItem.hbs';
-
 import './ChatItem.pcss';
 
 interface Props {

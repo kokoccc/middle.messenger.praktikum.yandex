@@ -3,7 +3,6 @@ import imageAvatarDefault from 'images/avatar.svg';
 import { AvatarInput } from './components/AvatarInput/AvatarInput';
 
 import template from './Avatar.hbs';
-
 import './Avatar.pcss';
 
 interface Props {

@@ -40,8 +40,8 @@ class Router {
     preloader.hide();
   }
 
-  private _addRoute(pathname: string, block: TypeofBlock, access: string) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery }, access);
+  private _addRoute(routeParams: IRouteParams) {
+    const route = new Route({ ...routeParams, props: { rootQuery: this._rootQuery } });
     this.routes.push(route);
   }
 
@@ -67,8 +67,8 @@ class Router {
     return null;
   }
 
-  use(pathname: string, block: TypeofBlock, status = 'all'): Router {
-    this._addRoute(pathname, block, status);
+  use(routeParams: IRouteParams) {
+    this._addRoute(routeParams);
 
     return this;
   }

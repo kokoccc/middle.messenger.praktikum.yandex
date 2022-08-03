@@ -1,13 +1,13 @@
 import { Block } from 'utils';
 
-import template from './AvatarInput.hbs';
-import './AvatarInput.pcss';
+import template from './Sheet.hbs';
+import './Sheet.pcss';
 
 interface Props {
-  events: Record<string, (event: Event) => void>
+  content: IProps
 }
 
-export class AvatarInput extends Block {
+export class LayoutSheet extends Block {
   constructor(props: Props) {
     super({ ...props });
   }

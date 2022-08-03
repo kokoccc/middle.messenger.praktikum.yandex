@@ -13,6 +13,14 @@ declare global {
   // TYPES
   export type TIndexed<T = unknown> = { [key in string]: T; };
 
+  // ROUTER
+  export interface IRouteParams {
+    route: string,
+    view: TypeofBlock,
+    layout?: TypeofBlock,
+    access?: string
+  }
+
   export type Props = Record<string, unknown>;
   export type TSubmitData = { [k: string]: FormDataEntryValue; };
 

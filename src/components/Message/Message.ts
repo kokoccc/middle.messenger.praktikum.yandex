@@ -7,7 +7,6 @@ import iconSentWhite from 'images/sent-white.svg';
 import iconRead from 'images/read.svg';
 import iconReadWhite from 'images/read-white.svg';
 import template from './Message.hbs';
-
 import './Message.pcss';
 
 interface Props {

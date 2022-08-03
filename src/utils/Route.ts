@@ -1,16 +1,28 @@
-import { renderDOM } from 'utils';
+import { Block, renderDOM } from 'utils';
 import { isEqual } from 'helpers';
+
+interface IRouteConstructorParams extends IRouteParams {
+  props: TIndexed
+}
 
 export class Route {
   private _pathname: string;
   private _blockClass: TypeofBlock;
-  private _block: TBlock | null;
+  private _layoutClass: TypeofBlock | null = null;
+  private _block: Block | null;
   private _props: Props;
   private _access: string;
 
-  constructor(pathname: string, view: TypeofBlock, props: Props, access: string) {
-    this._pathname = pathname;
+  constructor({
+    route, view, layout, access = 'all', props,
+  }: IRouteConstructorParams) {
+    this._pathname = route;
     this._blockClass = view;
+
+    if (layout) {
+      this._layoutClass = layout;
+    }
+
     this._block = null;
     this._props = props;
     this._access = access;
@@ -40,7 +52,13 @@ export class Route {
   render(replaceContent = false) {
     const query = this._props.rootQuery as string;
 
-    this._block = new this._blockClass();
+    if (this._layoutClass) {
+      this._block = new this._layoutClass({
+        content: new this._blockClass(),
+      });
+    } else {
+      this._block = new this._blockClass();
+    }
 
     renderDOM(query, this._block, replaceContent);
   }

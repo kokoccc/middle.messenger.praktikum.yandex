@@ -1,6 +1,7 @@
 import { ROUTES } from 'constants';
 import { router, preloader } from 'utils';
 
+import { LayoutSheet } from 'layouts';
 import {
   PageChats,
   PageError404,
@@ -16,11 +17,19 @@ import './styles/styles.pcss';
 preloader.show();
 
 router
-  .use(ROUTES.login, PageLogin, 'unauth')
-  .use(ROUTES.signUp, PageSignUp, 'unauth')
-  .use(ROUTES.chats, PageChats, 'auth')
-  .use(ROUTES.settings, PageSettings, 'auth')
-  .use(ROUTES.password, PagePassword, 'auth')
-  .use(ROUTES.error500, PageError500)
-  .use('*', PageError404)
+  .use({
+    route: ROUTES.login, view: PageLogin, layout: LayoutSheet, access: 'unauth',
+  })
+  .use({
+    route: ROUTES.signUp, view: PageSignUp, layout: LayoutSheet, access: 'unauth',
+  })
+  .use({ route: ROUTES.chats, view: PageChats, access: 'auth' })
+  .use({
+    route: ROUTES.settings, view: PageSettings, layout: LayoutSheet, access: 'auth',
+  })
+  .use({
+    route: ROUTES.password, view: PagePassword, layout: LayoutSheet, access: 'auth',
+  })
+  .use({ route: ROUTES.error500, view: PageError500 })
+  .use({ route: '*', view: PageError404 })
   .start();

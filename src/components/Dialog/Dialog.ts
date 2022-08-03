@@ -2,7 +2,6 @@ import { Block, renderDOM } from 'utils';
 import { ButtonClose } from 'components';
 
 import template from './Dialog.hbs';
-
 import './Dialog.pcss';
 
 interface Props {
