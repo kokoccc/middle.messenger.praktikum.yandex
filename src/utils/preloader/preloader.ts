@@ -4,6 +4,10 @@ import template from './preloader.hbs';
 import './preloader.pcss';
 
 class Preloader extends Block {
+  constructor(props: IProps = {}) {
+    super({ ...props });
+  }
+
   show() {
     document.documentElement.style.overflow = 'hidden';
     renderDOM('#app', this);

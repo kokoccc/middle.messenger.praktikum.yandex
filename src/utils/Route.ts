@@ -10,7 +10,7 @@ export class Route {
   private _blockClass: TypeofBlock;
   private _layoutClass: TypeofBlock | null = null;
   private _block: Block | null;
-  private _props: Props;
+  private _props: TIndexed;
   private _access: string;
 
   constructor({

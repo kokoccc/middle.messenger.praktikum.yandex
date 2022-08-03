@@ -92,8 +92,13 @@ const elements = {
 };
 
 export class PageChats extends Block {
-  constructor() {
-    super({ iconDots, iconMenu, ...elements });
+  constructor(props: IProps = {}) {
+    super({
+      ...props,
+      iconDots,
+      iconMenu,
+      ...elements,
+    });
   }
 
   render() {

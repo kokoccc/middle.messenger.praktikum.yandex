@@ -4,8 +4,9 @@ import imageError from 'images/error-404.svg';
 import './Error404.pcss';
 
 export class PageError404 extends LayoutError {
-  constructor() {
+  constructor(props: IProps = {}) {
     super({
+      ...props,
       title: 'Такой страницы нет 😞',
       image: imageError,
     });

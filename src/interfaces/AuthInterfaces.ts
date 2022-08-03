@@ -1,10 +1,10 @@
 export interface ISignIn {
-  data: TSubmitData
+  data: TFormData
   button: TButton
 }
 
 export interface ISignUp {
-  data: TSubmitData
+  data: TFormData
   button: TButton
 }
 

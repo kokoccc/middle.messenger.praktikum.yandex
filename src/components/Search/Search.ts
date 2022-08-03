@@ -5,8 +5,8 @@ import template from './Search.hbs';
 import './Search.pcss';
 
 export class Search extends Block {
-  constructor(props: Props = {}) {
-    super({ iconSearch, ...props });
+  constructor(props: IProps = {}) {
+    super({ ...props, iconSearch });
   }
 
   render() {

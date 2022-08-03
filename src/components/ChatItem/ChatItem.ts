@@ -5,7 +5,7 @@ import iconGroup from 'images/group.svg';
 import template from './ChatItem.hbs';
 import './ChatItem.pcss';
 
-interface Props {
+interface IComponentProps extends IProps {
   date: string
   events?: Record<string, (event: unknown) => void>
   isActive?: boolean
@@ -17,16 +17,16 @@ interface Props {
   unreadCount?: number
 }
 
-const getElements = (props: Props) => ({
-  avatar: new Avatar({
-    imagePath: props.imagePath || '',
-    size: 'small',
-  }),
-});
-
 export class ChatItem extends Block {
-  constructor(props: Props) {
-    super({ iconGroup, ...getElements(props), ...props });
+  constructor(props: IComponentProps) {
+    super({
+      ...props,
+      iconGroup,
+      avatar: new Avatar({
+        imagePath: props.imagePath || '',
+        size: 'small',
+      }),
+    });
   }
 
   render() {

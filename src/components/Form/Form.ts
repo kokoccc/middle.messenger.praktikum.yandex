@@ -4,16 +4,17 @@ import { TextField } from 'components';
 import template from './Form.hbs';
 import './Form.pcss';
 
-interface FormProps {
+interface IComponentProps extends IProps {
   button: TButton
   events?: TEventsProp
   fields: TTextField[]
-  submit?: (formData: TSubmitData) => void
+  submit?: (formData: TFormData) => void
 }
 
 export class Form extends Block {
-  constructor(props: FormProps) {
+  constructor(props: IComponentProps) {
     super({
+      ...props,
       events: {
         submit: (event: Event) => {
           if (!props.submit) {
@@ -32,7 +33,6 @@ export class Form extends Block {
           }
         },
       },
-      ...props,
     });
   }
 

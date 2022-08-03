@@ -4,12 +4,12 @@ export interface IChangeAvatar {
 }
 
 export interface IChangePassword {
-  data: TSubmitData
+  data: TFormData
   button: TButton
   fields: TTextField[]
 }
 
 export interface IChangeProfile {
-  data: TSubmitData
+  data: TFormData
   button: TButton
 }

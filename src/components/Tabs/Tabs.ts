@@ -7,12 +7,12 @@ import './Tabs.pcss';
 export class Tabs extends Block {
   constructor(props: IProps = {}) {
     super({
+      ...props,
       pages: [
         { title: 'Вход', path: ROUTES.login },
         { title: 'Регистрация', path: ROUTES.signUp },
       ],
       pathname: window.location.pathname,
-      ...props,
     });
   }
 

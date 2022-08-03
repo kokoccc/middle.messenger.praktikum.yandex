@@ -115,8 +115,9 @@ const elements = {
 };
 
 export class PageSettings extends Block {
-  constructor(props: IProps) {
+  constructor(props: IProps = {}) {
     super({
+      ...props,
       ...elements,
       form: new Form({
         fields: [
@@ -131,7 +132,7 @@ export class PageSettings extends Block {
           text: 'Сохранить',
           class: 'mt-1 align-self-center',
         }),
-        submit(formData: TSubmitData) {
+        submit(formData: TFormData) {
           usersController.changeProfile({
             data: formData,
             button: this.button,
@@ -139,7 +140,6 @@ export class PageSettings extends Block {
         },
       }),
       passwordChangePath: ROUTES.password,
-      ...props,
     });
 
     store.on(StoreEvents.Updated, this.updateProps);

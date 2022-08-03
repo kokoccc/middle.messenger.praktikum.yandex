@@ -8,8 +8,9 @@ import template from './SignUp.hbs';
 import './SignUp.pcss';
 
 export class PageSignUp extends Block {
-  constructor(props: IProps) {
+  constructor(props: IProps = {}) {
     super({
+      ...props,
       tabs: new Tabs(),
       form: new Form({
         fields: [
@@ -81,14 +82,13 @@ export class PageSignUp extends Block {
           text: 'Зарегистрироваться',
           class: 'mt-1 align-self-center',
         }),
-        submit(formData: TSubmitData) {
+        submit(formData: TFormData) {
           authController.signUp({
             data: formData,
             button: this.button,
           });
         },
       }),
-      ...props,
     });
   }
 

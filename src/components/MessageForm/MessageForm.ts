@@ -6,11 +6,11 @@ import template from './MessageForm.hbs';
 import './MessageForm.pcss';
 
 export class MessageForm extends Block {
-  constructor(props: Props = {}) {
+  constructor(props: IProps = {}) {
     super({
+      ...props,
       iconClip,
       iconEnvelope,
-      ...props,
       formSelector: '.message-form',
     });
   }

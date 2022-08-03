@@ -23,13 +23,19 @@ router
   .use({
     route: ROUTES.signUp, view: PageSignUp, layout: LayoutSheet, access: 'unauth',
   })
-  .use({ route: ROUTES.chats, view: PageChats, access: 'auth' })
+  .use({
+    route: ROUTES.chats, view: PageChats, access: 'auth',
+  })
   .use({
     route: ROUTES.settings, view: PageSettings, layout: LayoutSheet, access: 'auth',
   })
   .use({
     route: ROUTES.password, view: PagePassword, layout: LayoutSheet, access: 'auth',
   })
-  .use({ route: ROUTES.error500, view: PageError500 })
-  .use({ route: '*', view: PageError404 })
+  .use({
+    route: ROUTES.error500, view: PageError500,
+  })
+  .use({
+    route: '*', view: PageError404,
+  })
   .start();

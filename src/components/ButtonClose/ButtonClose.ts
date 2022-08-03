@@ -5,8 +5,8 @@ import template from './ButtonClose.hbs';
 import './ButtonClose.pcss';
 
 export class ButtonClose extends Block {
-  constructor(props: Props) {
-    super({ imageClose, ...props });
+  constructor(props: IProps = {}) {
+    super({ ...props, imageClose });
   }
 
   render() {

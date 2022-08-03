@@ -3,12 +3,12 @@ import { Block } from 'utils';
 import template from './Sheet.hbs';
 import './Sheet.pcss';
 
-interface Props {
+interface ILayoutProps {
   content: IProps
 }
 
 export class LayoutSheet extends Block {
-  constructor(props: Props) {
+  constructor(props: ILayoutProps) {
     super({ ...props });
   }
 

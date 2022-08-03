@@ -3,12 +3,8 @@ import { Block } from 'utils';
 import template from './AvatarInput.hbs';
 import './AvatarInput.pcss';
 
-interface Props {
-  events: Record<string, (event: Event) => void>
-}
-
 export class AvatarInput extends Block {
-  constructor(props: Props) {
+  constructor(props: IProps = {}) {
     super({ ...props });
   }
 

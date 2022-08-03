@@ -24,7 +24,7 @@ export class Block {
   private _element: HTMLElement = document.createElement('div');
 
   id = '';
-  props: Props = {};
+  props: IProps = {};
   children: TChildren = {};
   listeners: Listeners = {};
   isValueChanged = false;
@@ -43,9 +43,9 @@ export class Block {
     this.eventBus().emit(EVENTS.INIT);
   }
 
-  private _getChildren(propsAndChildren: Props) {
-    const children: Props = {};
-    const props: Props = {};
+  private _getChildren(propsAndChildren: IProps) {
+    const children: Record<string, Block> = {};
+    const props: IProps = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       const isChildrenList = Array.isArray(value) && value.every((item) => item instanceof Block);
@@ -65,7 +65,7 @@ export class Block {
     return { children, props };
   }
 
-  private _makePropsProxy = (props: Props): Props => new Proxy(props, {
+  private _makePropsProxy = (props: IProps) => new Proxy(props, {
     get: (target: Record<string, unknown>, propName: string): unknown => {
       if (propName.startsWith('_')) {
         throw new Error(`Cannot get private property value: ${propName}`);
@@ -123,7 +123,7 @@ export class Block {
     });
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props) {
+  private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
 
     if (response) {
@@ -155,7 +155,7 @@ export class Block {
 
   componentDidMount() {}
 
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(oldProps: IProps, newProps: IProps) {
     return { oldProps, newProps };
   }
 
@@ -163,7 +163,7 @@ export class Block {
     return document.createDocumentFragment();
   }
 
-  compile(template: (arg0: unknown) => unknown, props: Props = {}): DocumentFragment {
+  compile(template: (arg0: unknown) => unknown, props: IProps = {}): DocumentFragment {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
@@ -186,7 +186,7 @@ export class Block {
     return this._element;
   }
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: IProps) => {
     if (!nextProps) {
       return;
     }

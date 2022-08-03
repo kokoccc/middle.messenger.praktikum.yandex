@@ -5,7 +5,7 @@ import { AvatarInput } from './components/AvatarInput/AvatarInput';
 import template from './Avatar.hbs';
 import './Avatar.pcss';
 
-interface Props {
+interface IComponentProps extends IProps {
   class?: string
   events?: Record<string, (event: Event) => void>
   imagePath?: string
@@ -15,10 +15,10 @@ interface Props {
 }
 
 export class Avatar extends Block {
-  constructor(props: Props = {}) {
+  constructor(props: IComponentProps) {
     const propss = {
-      imageAvatarDefault,
       ...props,
+      imageAvatarDefault,
     };
 
     const { onImageUpload } = props;

@@ -1,4 +1,4 @@
-type Listener<T extends unknown[] = Props[]> = (...args: T) => void;
+type Listener<T extends unknown[] = TIndexed[]> = (...args: T) => void;
 
 export class EventBus {
   private listeners: Record<string, Listener[]> = {};
@@ -21,7 +21,7 @@ export class EventBus {
     );
   }
 
-  emit(event: string, ...args: Props[]): void {
+  emit(event: string, ...args: TIndexed[]): void {
     if (!this.listeners[event]) {
       return;
     }

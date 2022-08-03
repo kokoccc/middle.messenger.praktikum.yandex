@@ -4,7 +4,7 @@ import { TextFieldInput } from './components/TextFieldInput/TextFieldInput';
 import template from './TextField.hbs';
 import './TextField.pcss';
 
-interface Props extends IProps {
+interface IComponentProps extends IProps {
   class?: string
   error?: boolean
   errorMessage?: string
@@ -22,13 +22,13 @@ interface Props extends IProps {
 const COMPONENT_BASE_CLASS_NAME = 'ui-text-field';
 
 export class TextField extends Block {
-  constructor(props: Props) {
+  constructor(props: IComponentProps) {
     super({
+      ...props,
       input: new TextFieldInput({
         ...props,
         callback: () => this.validate(),
       }),
-      ...props,
     });
   }
 

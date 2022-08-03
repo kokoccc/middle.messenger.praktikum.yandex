@@ -9,7 +9,7 @@ import iconReadWhite from 'images/read-white.svg';
 import template from './Message.hbs';
 import './Message.pcss';
 
-interface Props {
+interface IComponentProps extends IProps {
   time: string,
   image?: string
   incoming: boolean
@@ -20,15 +20,15 @@ interface Props {
 }
 
 export class Message extends Block {
-  constructor(props: Props) {
+  constructor(props: IComponentProps) {
     super({
+      ...props,
       iconSending,
       iconSendingWhite,
       iconSent,
       iconSentWhite,
       iconRead,
       iconReadWhite,
-      ...props,
     });
   }
 

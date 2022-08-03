@@ -3,7 +3,7 @@ import { Block } from 'utils';
 import template from './Button.hbs';
 import './Button.pcss';
 
-interface Props extends IProps {
+interface IComponentProps extends IProps {
   class?: string
   danger?: boolean
   loading?: boolean
@@ -14,7 +14,7 @@ interface Props extends IProps {
 }
 
 export class Button extends Block {
-  constructor(props: Props) {
+  constructor(props: IComponentProps) {
     super({ ...props });
   }
 

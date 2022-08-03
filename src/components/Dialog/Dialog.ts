@@ -4,7 +4,7 @@ import { ButtonClose } from 'components';
 import template from './Dialog.hbs';
 import './Dialog.pcss';
 
-interface Props {
+interface IComponentProps extends IProps {
   cancelButton: TBlock
   confirmButton: TBlock
   content: TBlock
@@ -12,14 +12,14 @@ interface Props {
 }
 
 export class Dialog extends Block {
-  constructor(props: Props) {
+  constructor(props: IComponentProps) {
     super({
+      ...props,
       buttonClose: new ButtonClose({
         events: {
           click: () => this.hide(),
         },
       }),
-      ...props,
     });
   }
 

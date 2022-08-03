@@ -3,7 +3,7 @@ import { Block } from 'utils';
 import template from './TextFieldInput.hbs';
 import './TextFieldInput.pcss';
 
-interface Props extends IProps {
+interface IComponentProps extends IProps {
   callback?: (event: Event) => void
   error?: boolean
   inputmode?: string
@@ -14,13 +14,13 @@ interface Props extends IProps {
 }
 
 export class TextFieldInput extends Block {
-  constructor(props: Props) {
+  constructor(props: IComponentProps) {
     super({
+      ...props,
       events: {
         blur: props.callback,
         focus: props.callback,
       },
-      ...props,
     });
   }
 

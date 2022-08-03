@@ -3,8 +3,14 @@ import { Block } from 'utils';
 import template from './Error.hbs';
 import './Error.pcss';
 
+interface ILayoutProps extends IProps {
+  title: string
+  subtitle?: string
+  image: string
+}
+
 export class LayoutError extends Block {
-  constructor(props: IProps) {
+  constructor(props: ILayoutProps) {
     super({ ...props });
   }
 

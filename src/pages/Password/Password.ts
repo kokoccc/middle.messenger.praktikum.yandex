@@ -8,8 +8,9 @@ import template from './Password.hbs';
 import './Password.pcss';
 
 export class PagePassword extends Block {
-  constructor(props: IProps) {
+  constructor(props: IProps = {}) {
     super({
+      ...props,
       linkBack: new LinkBack({
         path: '/settings',
       }),
@@ -47,7 +48,7 @@ export class PagePassword extends Block {
           text: 'Сохранить',
           class: 'mt-1 align-self-center',
         }),
-        submit(formData: TSubmitData) {
+        submit(formData: TFormData) {
           usersController.changePassword({
             data: formData,
             button: this.button,
@@ -55,7 +56,6 @@ export class PagePassword extends Block {
           });
         },
       }),
-      ...props,
     });
   }
 
