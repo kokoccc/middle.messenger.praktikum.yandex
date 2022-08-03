@@ -7,7 +7,7 @@ import './Form.pcss';
 interface FormProps {
   button: TButton
   events?: TEventsProp
-  fields: TTextField[] | Record<string, TTextField>
+  fields: TTextField[]
   submit?: (formData: TSubmitData) => void
 }
 
